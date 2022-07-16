@@ -1,0 +1,59 @@
+# Compiled #
+############
+app/dist/css/*
+app/docs/*.html
+app/docs/components/*.html
+designs/
+dist/
+dist/
+docs/ids-website/dist.zip
+docs/ids-website/dist/
+documentation/
+public/js/
+public/stylesheets/
+public/svg/
+src/components/theme/theme*.json
+temp/
+templates/**/doc.html
+test-reports/
+views/docs
+scripts/deploy/build
+
+# Packages #
+############
+node_modules/
+private/
+
+# Misc #
+########
+*.iml
+.idea
+.idea/
+.tmp/
+config.json
+coverage
+dist.zip
+docs/api
+eslint.log
+junit-functional.xml
+junit-unit.xml
+junit.xml
+npm-debug.log
+phantomjsdriver.log
+report.xml
+views/docs/changelog-contents.html
+xunit.xml
+.env
+
+# OS generated files #
+######################
+.DS_Store
+ep.code-workspace
+
+# Deprecated (or replaced by dynamic building #
+##############
+ids-enterprise/
+package-lock.json
+src/components/emptymessage/*svg-empty.html
+src/components/icons/*svg.html
+yarn.lock
