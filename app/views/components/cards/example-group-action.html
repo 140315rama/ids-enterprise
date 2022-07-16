@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="four columns">
+
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Tasks</h2>
+        <button class="btn-actions" type="button" id="btn-1">
+          <span class="audible">Actions</span>
+          <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+            <use href="#icon-more"></use>
+          </svg>
+        </button>
+        <ul class="popupmenu">
+          <li><a href="#" id="add-new-item">Add new action item</a></li>
+          <li><a href="#" id="regular-action">Regular action</a></li>
+          <li><a href="#" id="indv-action">Individual Action</a></li>
+        </ul>
+      </div>
+
+      <div class="card-content">
+        <div class="card-group-action">
+          <div class="flex-toolbar" role="toolbar" aria-label="Card group action toolbar">
+            <div class="toolbar-section title">Card group action</div>
+            <div class="toolbar-section buttonset">
+              <button type="button" class="btn-icon" title="Filter" class="filter">
+                 <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+                     <use href="#icon-filter"></use>
+                 </svg>
+                 <span class="audible">Filter</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="listview" id="test-listview" data-options="{template: 'test-tmpl', selectable: 'multiple', source: '{{basepath}}api/tasks'}"></div>
+
+        {{={{{ }}}=}}
+        <script id="test-tmpl" type="text/html">
+            <ul>
+              {{#dataset}}
+                 <li>
+                  <p>{{desc}}</p>
+                </li>
+              {{/dataset}}
+            </ul>
+        </script>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,167 @@
+<style>
+  .example1 .slide-content {
+    height: 318px;
+    padding-top: 230px;
+    text-align: center;
+    width: 100%;
+  }
+  .example1 .slides .slide:nth-child(1) .slide-content,
+  .example1 .slides .slide:nth-child(4) .slide-content,
+  .example1 .slides .slide:nth-child(7) .slide-content {
+    background: url('{{basepath}}images/circlepager-bg-slide-1.png') 50% -30px no-repeat;
+  }
+  .example1 .slides .slide:nth-child(2) .slide-content,
+  .example1 .slides .slide:nth-child(5) .slide-content,
+  .example1 .slides .slide:nth-child(8) .slide-content {
+    background: url('{{basepath}}images/circlepager-bg-slide-2.png') 50% 0 no-repeat;
+  }
+  .example1 .slides .slide:nth-child(3) .slide-content,
+  .example1 .slides .slide:nth-child(6) .slide-content,
+  .example1 .slides .slide:nth-child(9) .slide-content {
+    background: url('{{basepath}}images/circlepager-bg-slide-3.png') 50% 20px no-repeat;
+  }
+</style>
+
+<div class="row">
+  <div class="twelve columns">
+    <p>
+      <br/><strong>Resize browser window to see less or more items.</strong><b/r>
+      <a href="#" class="hyperlink prev" id="prev">Prev</a> | <a href="#" class="hyperlink next" next="next">Next</a>
+    </p>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="full-width column">
+    <div class="card">
+      <div class="card-header">
+          <h2 class="widget-title">Circle Pager Example</h2>
+          <button type="button" class="btn-actions" type="button" id="btn-1">
+            <span class="audible">Actions</span>
+            <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+              <use href="#icon-more"></use>
+            </svg>
+          </button>
+          <ul class="popupmenu actions top">
+            <li><a href="#" id="action-1">Action One</a></li>
+            <li><a href="#" id="action-2">Action Two</a></li>
+          </ul>
+      </div>
+      <div class="card-content">
+        <div class="circlepager example1" data-options="{slidesToShow: 3}">
+          <div class="slides">
+
+            <div class="slide">
+              <div class="slide-content">
+                <p>
+                  <a href="#" class="hyperlink" id="slide-link-1">Nikon 24-85mm f/2.8-4.0D IF Auto Focus Zoom</a><br />
+                $750.00 (Item 1)
+                </p>
+              </div>
+            </div>
+
+            <div class="slide">
+              <div class="slide-content">
+                <p>
+                  <a href="#" class="hyperlink" id="slide-link-2">Nikon 24-85mm f/2.8-4.0D IF Auto Focus Zoom</a><br />
+                $750.00 (Item 2)
+                </p>
+              </div>
+            </div>
+
+            <div class="slide">
+              <div class="slide-content">
+                <p>
+                  <a href="#" class="hyperlink" id="slide-link-3">Nikon 24-85mm f/2.8-4.0D IF Auto Focus Zoom</a><br />
+                $750.00 (Item 3)
+                </p>
+              </div>
+            </div>
+
+            <div class="slide">
+              <div class="slide-content">
+                <p>
+                  <a href="#" class="hyperlink" id="slide-link-4">Nikon 24-85mm f/2.8-4.0D IF Auto Focus Zoom</a><br />
+                $750.00 (Item 4)
+                </p>
+              </div>
+            </div>
+
+            <div class="slide">
+              <div class="slide-content">
+                <p>
+                  <a href="#" class="hyperlink" id="slide-link-5">Nikon 24-85mm f/2.8-4.0D IF Auto Focus Zoom</a><br />
+                $750.00 (Item 5)
+                </p>
+              </div>
+            </div>
+
+            <div class="slide">
+              <div class="slide-content">
+                <p>
+                  <a href="#" class="hyperlink" id="slide-link-6">Nikon 24-85mm f/2.8-4.0D IF Auto Focus Zoom</a><br />
+                $750.00 (Item 6)
+                </p>
+              </div>
+            </div>
+
+            <div class="slide">
+              <div class="slide-content">
+                <p>
+                  <a href="#" class="hyperlink" id="slide-link-7">Nikon 24-85mm f/2.8-4.0D IF Auto Focus Zoom</a><br />
+                $750.00 (Item 7)
+                </p>
+              </div>
+            </div>
+
+            <div class="slide">
+              <div class="slide-content">
+                <p>
+                  <a href="#" class="hyperlink" id="slide-link-8">Nikon 24-85mm f/2.8-4.0D IF Auto Focus Zoom</a><br />
+                $750.00 (Item 8)
+                </p>
+              </div>
+            </div>
+
+            <div class="slide">
+              <div class="slide-content">
+                <p>
+                  <a href="#" class="hyperlink" id="slide-link-9">Nikon 24-85mm f/2.8-4.0D IF Auto Focus Zoom</a><br />
+                $750.00 (Item 9)
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$('body').on('initialized', function() {
+  var example1 = $('.example1'),
+    parent = $('.card-content'),
+    api = example1.data('circlepager');
+
+  // previous / next
+  $('.prev').on('click', function(e) {
+    e.preventDefault();
+    api.prev();
+  });
+
+  $('.next').on('click', function(e) {
+    e.preventDefault();
+    api.next();
+  });
+
+  example1.circlepager({
+    attributes: [
+      { name: 'id', value: 'circlepager-id-1' },
+      { name: 'data-automation-id',  value: 'automation-id-circlepager-1' }
+    ]
+  });
+});
+</script>

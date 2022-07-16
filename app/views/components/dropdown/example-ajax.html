@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="six columns">
+
+    <h2>Dropdown Test: AJAX</h2>
+
+    <p>The dropdown control on this page has its options created by loading from an external source with an AJAX request.
+    </p>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="twelve columns">
+
+    <div class="field">
+      <label for="ajax-test">Ajax Test</label>
+      <select id="ajax-test" name="ajax-test" class="dropdown" data-init="false"></select>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  $('body').on('initialized', function() {
+
+    $('#ajax-test').dropdown({
+      source: function (response, term) {
+        $.getJSON('{{basepath}}api/states', function(data, term) {
+          response(data);
+        });
+      }
+    });
+
+  });
+</script>

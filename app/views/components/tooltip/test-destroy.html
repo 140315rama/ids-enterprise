@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="six columns">
+    <h2>Testing Destroy (Requires Chrome Console) See: SOHO-6476</h2>
+  </div>
+</div>
+
+<div class="row top-padding">
+  <div class="twelve columns">
+
+    <button class="btn-secondary" type="button" id="test" title="Tooltips Provide Additional Information">
+      Normal Tooltip
+    </button>
+
+    <button class="btn-secondary" type="button" id="destroy">
+      Remove
+    </button>
+
+  </div>
+</div>
+
+<script>
+
+  $('#destroy').on('click', function () {
+    $('#test').data('tooltip').destroy();
+    $('#test').remove();
+    alert('Now Check Chrome Profiler')
+  });
+
+</script>

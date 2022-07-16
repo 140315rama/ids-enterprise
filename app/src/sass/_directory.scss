@@ -1,0 +1,26 @@
+// Directory Listing Styles
+//=================================================
+
+.badge.test-type {
+  min-width: 75px;
+  text-align: center;
+}
+
+.badge.azure07,
+.badge.ruby07 {
+  color: $ids-color-palette-white;
+}
+
+.directory-listing {
+  .icon {
+    color: $ids-color-brand-primary-alt;
+
+    &.example {
+      color: $ids-color-palette-ruby-50;
+    }
+
+    &.test {
+      color: $ids-color-palette-azure-50;
+    }
+  }
+}

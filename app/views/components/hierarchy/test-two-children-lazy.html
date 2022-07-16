@@ -1,0 +1,86 @@
+<div class="twelve columns">
+  <figure class="hierarchy" id="hierarchy"></figure>
+</div>
+
+<script>
+
+  var
+    menPath = '{{basepath}}/images/',
+    womenPath = '{{basepath}}/images/',
+    orgdata = [{
+      id: '1', Name: 'Raj', Position: 'Director', EmploymentType: 'FT', Picture: '',
+      children: [
+        {
+          id: '1_2', Name: 'Samual Smith', Position: 'Records Manager', EmploymentType: 'FT', Picture: '',
+          children: [
+            { id: '1_2_2', Name: 'Tomas Dawes', Position: 'Records Clerk', EmploymentType: 'PT', Picture: '',
+              children: [
+                {
+                  id: '1_2_2_1', Name: 'Sujit Paulo', Position: 'Records Manager', EmploymentType: 'FT', Picture: '',
+                  children: [
+                    { id: '1_2_2_1_1', Name: 'Tomas Cleveland', Position: 'Records Clerk', EmploymentType: 'C', Picture: '', isLeaf: true},
+                    { id: '1_2_2_1_2', Name: 'Sam Dawes', Position: 'Records Clerk', EmploymentType: 'PT', Picture: '', isLeaf: true },
+                    { id: '1_2_2_1_3', Name: 'Richard Fairbanks', Position: 'Records Clerk', EmploymentType: 'FT', Picture: '', isLeaf: true  }
+                  ]
+                }
+              ]
+            },
+            { id: '1_2_3', Name: 'Paul Fairbanks', Position: 'Records Clerk', EmploymentType: 'FT', Picture: '',
+              children: [
+                { id: '1_2_3_1', Name: 'Lebron Cleveland', Position: 'Records Clerk', EmploymentType: 'C', Picture: '', isLeaf: true},
+                { id: '1_2_3_2', Name: 'Amy Dawes', Position: 'Records Clerk', EmploymentType: 'PT', Picture: '', isLeaf: true },
+                { id: '1_2_3_3', Name: 'Dick Fairbanks', Position: 'Records Clerk', EmploymentType: 'FT', Picture: '', isLeaf: true  }
+              ]
+            },
+            { id: '1_2_1', Name: 'Andy Cleveland', Position: 'Records Clerk', EmploymentType: 'C', Picture: '', isLeaf: true},
+          ]
+        }
+      ]
+    }];
+
+
+  $(function () {
+
+    var legendData = [
+      { 'value': 'FT', 'label': 'Full Time' },
+      { 'value': 'PT', 'label': 'Part Time' },
+      { 'value': 'C', 'label': 'Contractor' },
+      { 'value': 'O', 'label': 'Open Position' }
+    ];
+
+    $('#hierarchy').hierarchy({
+      templateId: 'hierarchyChartTemplate',
+      legendKey: 'EmploymentType',
+      legend: legendData,
+      dataset: orgdata
+    });
+
+  });
+</script>
+
+
+{{={{{ }}}=}}
+<script type="text/html" id="hierarchyChartTemplate">
+  <div class="leaf {{colorClass}}" id="{{id}}">
+
+    {{#Picture}}
+    <img src="{{Picture}}" class="image" alt="Image of {{Name}}" />
+    {{/Picture}}
+    {{^Picture}}
+    <span class="image-placeholder"></span>
+    {{/Picture}}
+
+    <div class="detail">
+      <p class="heading">{{Name}}</p>
+      <p class="subheading">{{Position}}</p>
+      <p class="micro">{{EmploymentType}}</p>
+    </div>
+
+    <button class="btn btn-icon" type="button">
+      <svg role="presentation" aria-hidden="true" focusable="false" class="icon">
+        <use href="#icon-caret-up" />
+      </svg>
+      <span class="audible">Expand/Collapse</span>
+    </button>
+  </div>
+</script>

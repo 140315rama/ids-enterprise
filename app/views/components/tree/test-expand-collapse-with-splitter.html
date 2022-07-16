@@ -1,0 +1,93 @@
+<div class="two-column fixed" role="main">
+
+  <div class="sidebar scrollable">
+
+    <div class="panel-header">
+      <div class="toolbar standalone">
+        <div class="title">
+          <span>Nodes</span>
+        </div>
+
+        <div class="buttonset">
+          <button type="button" class="btn-icon" title="Expand All" id="expand-collapse">
+             <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+                 <use href="#icon-expand-all"></use>
+             </svg>
+             <span class="audible">Expand All</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="splitter splitter-right" data-options="{collapseButton: true}"><div class="panel-header"></div></div>
+
+    <ul role="tree" aria-label="Asset Types" class="tree" data-init="false" id="json-tree">
+    </ul>
+
+  </div>
+
+  <div class="main" role="main">
+    <div class="content">
+    </div>
+  </div>
+
+</div>
+
+<script>
+  var sampleData;
+
+  sampleData = [{
+    "id": "node1",
+    "text": "Node One",
+    "open": false,
+    "selected": false,
+    "href": '/somelink/'
+  }, {
+    "id": "node2",
+    "text": "Node Two",
+    "open": true,
+    "selected": true,
+    "focus": true,
+    "children": [{
+        "id": "node3",
+        "text": "Node 2.1"
+      }, {
+        "id": "node4",
+        "text": "Node 2.2 with long text",
+        "children": [{
+          "id": "node5",
+          "text": "Node 2.2.1 also pretty long",
+          "icon": "icon-tree-chart",
+          "children": [{
+            "id": "node6",
+            "text": "Node 2.2.1.1",
+            "icon": "icon-tree-chart"
+          }]
+        }]
+      }]
+  }];
+
+  $('#json-tree').tree({dataset: sampleData});
+  $('button').tooltip();
+
+  //Expand Collapse
+  var isExpanded = false;
+  $('#expand-collapse').on('click', function () {
+    isExpanded = !isExpanded;
+
+    var btn = $(this),
+      api = $('#json-tree').data('tree');
+
+    //Actual Api Call Example
+    if (isExpanded) {
+      api.expandAll();
+    } else {
+      api.collapseAll();
+    }
+
+    btn.find('use').attr('href', isExpanded ? '#icon-collapse-all' : '#icon-expand-all');
+
+    console.log(btn.find('use').attr('href'));
+
+    btn.attr('title', isExpanded ? 'Collapse All' : 'Expand All').trigger('updated');
+  });
+</script>

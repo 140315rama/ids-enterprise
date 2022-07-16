@@ -1,0 +1,64 @@
+<div class="row">
+  <div class="six columns">
+    <h2>Accordion Test: No Reroute on Clicked Links</h2>
+    <a class="hyperlink" href="#SOHO-3585" target="_blank">Original JIRA Ticket</a> | <a class="hyperlink" href="#SOHO-6418" target="_blank">Updated JIRA Ticket</a>.<br />
+    <p><b>NOTE: </b> Use <a class="hyperlink" href="./test-angular-no-reroute-on-link-click.html">this test</a> when dealing with Angular.</p>
+    <p></p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="six columns">
+
+    <div id="link-accordion" class="accordion panel" data-options="{ rerouteOnLinkClick: false }">
+      <div class="accordion-header">
+        <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+          <use href="#icon-link"></use>
+        </svg>
+        <a href="/my-nonworking-link"><span>Non-working Link #1</span></a>
+      </div>
+
+      <div class="accordion-header">
+        <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+          <use href="#icon-link"></use>
+        </svg>
+        <a href="/my-nonworking-link"><span>Non-working Link #2</span></a>
+      </div>
+
+      <div class="accordion-header">
+        <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+          <use href="#icon-link"></use>
+        </svg>
+        <a href="/my-nonworking-link"><span>Non-working Link #3</span></a>
+      </div>
+
+      <div class="accordion-header">
+        <a href="/my-nonworking-link"><span>Non-working Link #4 (Now with sub-content!)</span></a>
+      </div>
+      <div class="accordion-pane">
+        <div class="accordion-content">
+          The header that contains this content and the headers below is also a link that can be followed.  Clicking the expander should force this to expand/collapse without triggering the link.  Clicking the link should cause a message.
+        </div>
+        <div class="accordion-header">
+          <a href="#">This link does not reroute anywhere.</a>
+        </div>
+        <div class="accordion-header">
+          <a href="#">Neither does this one.</a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+  $('body').on('initialized', function() {
+    $('#link-accordion').on('followlink.test', function(e, anchor) {
+      $('body').toast({
+        'title': 'Follow Link!',
+        'message': 'The link associated with accordion header <span style="font-weight: bold;">' + anchor.text().trim() + '</span> was clicked, and should not have automatically rerouted the browser\'s URL.'
+      });
+    });
+  });
+</script>

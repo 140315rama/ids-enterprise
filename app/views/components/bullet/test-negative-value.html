@@ -1,0 +1,68 @@
+
+<div class="container">
+	<div class="row">
+		<div class="twelve columns">
+
+			<div>
+				<div class="chart-container" id="bullet-example1" style="margin-top:20px;"></div>
+			</div>
+			<div>
+				<div class="chart-container" id="bullet-example2" style="margin-top:20px;"></div>
+			</div>
+			<div>
+				<div class="chart-container" id="bullet-example3" style="margin-top:20px;"></div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<script>
+$('body').on('initialized', function () {
+
+	var palette = Soho.theme.themeColors().palette;
+  var dataset1 = [{
+		data: [{
+			'title': 'Profit',
+			'subtitle': '%',
+			'ranges': [-60, 10, 70],
+			'measures': [-30, 30],
+			'markers': [35]
+		}],
+		barColors: [palette.azure['20'].value, palette.azure['40'].value, palette.azure['60'].value],
+		lineColors: [palette.white.value, palette.white.value, palette.white.value],
+		markerColors: [palette.white.value]
+	}];
+
+	var dataset2 = [{
+    data: [{
+			'title': 'Profit',
+			'subtitle': '%',
+			'ranges': [-30, 0, 30],
+			'measures': [10],
+			'markers': [25]
+		}],
+    barColors: [palette.azure['20'].value, palette.azure['40'].value, palette.azure['60'].value],
+    lineColors: [palette.white.value, palette.white.value,palette.white.value],
+    markerColors: [palette.white.value]
+  }];
+
+  var dataset3 = [{
+		data: [{
+			'title': 'Profit',
+			'subtitle': '%',
+			'ranges': [60, 80, 50],
+			'measures': [20, 50],
+			'markers': [35]
+		}],
+		barColors: [palette.azure['20'].value, palette.azure['40'].value, palette.azure['60'].value],
+		lineColors: [palette.white.value, palette.white.value, palette.white.value],
+		markerColors: [palette.white.value]
+	}];
+
+	$('#bullet-example1').chart({type: 'bullet', dataset: dataset1});
+	$('#bullet-example2').chart({type: 'bullet', dataset: dataset2});
+	$('#bullet-example3').chart({type: 'bullet', dataset: dataset3});
+
+});
+</script>

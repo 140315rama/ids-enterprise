@@ -1,0 +1,341 @@
+<header id="customizable-header" class="header">
+  <div class="{{#useFlexToolbar}}flex-toolbar{{/useFlexToolbar}}{{^useFlexToolbar}}toolbar{{/useFlexToolbar}}">
+    {{#useFlexToolbar}}
+    <div class="toolbar-section">
+      {{> includes/header-appmenu-trigger}}
+    </div>
+    {{/useFlexToolbar}}
+
+    <div class="{{#useFlexToolbar}}toolbar-section {{/useFlexToolbar}}title">
+      {{^useFlexToolbar}}
+      {{> includes/header-appmenu-trigger}}
+      {{/useFlexToolbar}}
+      <h1 id="title-text-elem">
+        <span class="page-title">Header Toolbar Gauntlet</span>
+      </h1>
+    </div>
+
+    {{#useFlexToolbar}}
+    <div class="toolbar-section search">
+      <div id="header-searchfield-wrapper" class="searchfield-wrapper">
+        <label for="header-searchfield" class="audible">Search</label>
+        <input id="header-searchfield" class="searchfield" name="header-searchfield" />
+      </div>
+    </div>
+    {{/useFlexToolbar}}
+
+    <div class="{{#useFlexToolbar}}toolbar-section {{/useFlexToolbar}}buttonset">
+      {{^useFlexToolbar}}
+      <div id="header-searchfield-wrapper" class="searchfield-wrapper toolbar-searchfield-wrapper">
+        <label for="header-searchfield" class="audible">Search</label>
+        <input id="header-searchfield" class="searchfield" name="header-searchfield" />
+      </div>
+      {{/useFlexToolbar}}
+
+      <button id="settings-button" class="btn">
+        <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+          <use href="#icon-settings"></use>
+        </svg>
+        <span>Settings</span>
+      </button>
+
+      <button id="delete-button" class="btn">
+        <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+          <use href="#icon-delete"></use>
+        </svg>
+        <span>Delete</span>
+      </button>
+
+      <button id="filter-button" class="btn">
+        <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+          <use href="#icon-filter"></use>
+        </svg>
+        <span>Filter</span>
+      </button>
+    </div>
+
+    <div id="more-button" class="{{#useFlexToolbar}}toolbar-section {{/useFlexToolbar}}more">
+      <button class="btn-actions" type="button">
+        <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+          <use href="#icon-more"></use>
+        </svg>
+        <span class="audible" data-translate="text">More</span>
+      </button>
+      <ul class="popupmenu">
+        <li><a href="#">Item One</a></li>
+        <li><a href="#">Item Two</a></li>
+        <li class="submenu">
+          <a href="#">Item Three</a>
+          <ul class="popupmenu">
+            <li><a href="#">Sub-Item One</a></li>
+            <li><a href="#">Sub-Item Two</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Item Four</a></li>
+      </ul>
+    </div>
+
+  </div>
+</header>
+<div class="row top-padding">
+  <div class="six columns">
+    <h2>Header Test: Gauntlet</h2>
+    <p>Related JIRA Ticket: SOHO-6434. This test demonstrates various configurations of a component header.  Use the controls below to customize the header above.</p>
+  </div>
+</div>
+<div class="row">
+  <div class="six columns">
+    <div class="field">
+      <label for="title-name">Header Title Text</label>
+      <input id="title-name" type="text" value="Header Toolbar Gauntlet"/>
+    </div>
+
+    <div class="field field-checkbox">
+      <input type="checkbox" class="checkbox" name="eyebrow-toggle" id="eyebrow-toggle"/>
+      <label for="eyebrow-toggle" class="checkbox-label">Toggle "Eyebrow" Header Text</label>
+    </div>
+
+    <div class="field">
+      <label for="eyebrow-text">Eyebrow Text</label>
+      <input id="eyebrow-text" type="text" value="Extra Info" disabled/>
+    </div>
+
+    <fieldset>
+      <legend>Searchfield Settings</legend>
+      <div class="field field-checkbox">
+        <input type="checkbox" class="checkbox" name="searchfield-toggle" id="searchfield-toggle" checked/>
+        <label for="searchfield-toggle" class="checkbox-label">Toggle Searchfield</label>
+      </div>
+      <div class="field field-checkbox">
+        <input type="checkbox" class="checkbox" name="searchfield-collapse-toggle" id="searchfield-collapse-toggle"/>
+        <label for="searchfield-collapse-toggle" class="checkbox-label">Collapsible</label>
+      </div>
+      <div class="field field-checkbox">
+        <input type="checkbox" class="checkbox" name="searchfield-clear-toggle" id="searchfield-clear-toggle"/>
+        <label for="searchfield-clear-toggle" class="checkbox-label">Clearable</label>
+      </div>
+    </fieldset>
+  </div>
+  <div class="six columns">
+    <fieldset>
+      <legend>Button Settings</legend>
+      <div class="field field-checkbox">
+        <input type="checkbox" class="checkbox" name="title-button-toggle" id="title-button-toggle" checked/>
+        <label for="title-button-toggle" class="checkbox-label">Toggle App Menu (Title) Button</label>
+      </div>
+      <div class="field field-checkbox">
+        <input type="checkbox" class="checkbox" name="settings-toggle" id="settings-toggle" checked/>
+        <label for="settings-toggle" class="checkbox-label">Toggle "Settings" Toolbar Button</label>
+      </div>
+      <div class="field field-checkbox">
+        <input type="checkbox" class="checkbox" name="delete-toggle" id="delete-toggle" checked/>
+        <label for="delete-toggle" class="checkbox-label">Toggle "Delete" Toolbar Button</label>
+      </div>
+      <div class="field field-checkbox">
+        <input type="checkbox" class="checkbox" name="filter-toggle" id="filter-toggle" checked/>
+        <label for="filter-toggle" class="checkbox-label">Toggle "Filter" Toolbar Button</label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Overflow Settings</legend>
+      <div class="field field-checkbox">
+        <input type="checkbox" class="checkbox" name="more-button-toggle" id="more-button-toggle" checked/>
+        <label for="more-button-toggle" class="checkbox-label">Toggle "More Actions" Button</label>
+      </div>
+    </fieldset>
+  </div>
+</div>
+
+<script id="test-script">
+  var headerElem = $('#customizable-header'),
+    toolbarElem = headerElem.children('.toolbar, .flex-toolbar'),
+    titleTextElem = $('#title-text-elem'),
+    textField = $('#title-name'),
+    eyebrowField = $('#eyebrow-text'),
+    titleButtonToggle = $('#title-button-toggle'),
+    searchfieldToggle = $('#searchfield-toggle'),
+    searchfieldCollapseToggle = $('#searchfield-collapse-toggle'),
+    searchfieldClearableToggle = $('#searchfield-clear-toggle'),
+    moreButtonToggle = $('#more-button-toggle'),
+    eyebrowToggle = $('#eyebrow-toggle'),
+    settingsToggle = $('#settings-toggle'),
+    filterToggle = $('#filter-toggle'),
+    deleteToggle = $('#delete-toggle'),
+    morePredefinedToggle = $('#more-predefined-toggle'),
+    appMenuTrigger = $('#app-menu-trigger'),
+    headerSearchfieldWrapper = $('#header-searchfield-wrapper'),
+    settingsBtn = $('#settings-button'),
+    filterBtn = $('#filter-button'),
+    deleteBtn = $('#delete-button'),
+    moreButtonElem = $('#more-button'),
+    moreBtn = moreButtonElem.children('.btn-actions'),
+    toolbarAPI;
+
+  function teardown() {
+    if (toolbarElem.is('.flex-toolbar')) {
+      toolbarElem.data('toolbar-flex')
+        .teardown();
+      return;
+    }
+
+    toolbarElem.data('toolbar')
+      .unbind()
+      .teardown();
+  }
+
+  function rebuild() {
+    if (toolbarElem.is('.flex-toolbar')) {
+      toolbarElem.data('toolbar-flex').init();
+      return;
+    }
+
+    toolbarElem.data('toolbar').init();
+  }
+
+  function updateHeaderText() {
+    var h1Contents = '';
+
+    if (eyebrowToggle.prop('checked')) {
+      h1Contents += '<span class="section-title">'+ eyebrowField.val() +'</span>';
+    }
+
+    h1Contents += '<span class="page-title">'+ textField.val() +'</span>';
+
+    titleTextElem.html(Soho.xss.sanitizeHTML(h1Contents));
+    toolbarElem.triggerHandler('recalculate-buttons');
+  }
+
+  function createTitleButton() {
+    teardown();
+
+    var btn = $('<button id="app-menu-trigger" class="btn-icon application-menu-trigger" type="button">' +
+      '<span class="audible" data-text="translate">AppMenuTriggerTextAlt</span>' +
+      '<span class="icon app-header">' +
+        '<span class="one"></span>' +
+        '<span class="two"></span>' +
+        '<span class="three"></span>' +
+      '</span>' +
+    '</button>');
+
+    // Flex Toolbar has a section before the `.title`
+    if (toolbarElem.is('.flex-toolbar')) {
+      btn.appendTo(toolbarElem.children().first());
+    } else {
+      btn.insertBefore(titleTextElem);
+    }
+
+    rebuild();
+    return btn;
+  }
+
+  function destroyTitleButton() {
+    if (!appMenuTrigger) {
+      return;
+    }
+
+    teardown();
+    appMenuTrigger.off().remove();
+    toolbarElem.triggerHandler('updated');
+    appMenuTrigger = undefined;
+    rebuild();
+  }
+
+  function updateTitleButton() {
+    if (titleButtonToggle.prop('checked')) {
+      teardown();
+      if (!appMenuTrigger) {
+        appMenuTrigger = createTitleButton();
+      }
+      rebuild();
+      return;
+    }
+
+    destroyTitleButton();
+  }
+
+  function updateSearchfield() {
+    var settings = {
+      clearable: searchfieldClearableToggle.prop('checked'),
+      collapsible: searchfieldCollapseToggle.prop('checked')
+    };
+
+    if (searchfieldToggle.prop('checked')) {
+      headerSearchfieldWrapper.removeClass('hidden');
+    } else {
+      headerSearchfieldWrapper.addClass('hidden');
+    }
+
+    $('#header-searchfield').data('searchfield').updated(settings);
+  }
+
+  function updateMoreButton(e) {
+    var isToggleChecked = moreButtonToggle.prop('checked');
+    var showPredefinedItems = morePredefinedToggle.prop('checked');
+
+    teardown();
+    // Enable the "predefined menu items" button if the toggler is checked
+    if (e && $(e.currentTarget).is(moreButtonToggle)) {
+      $(morePredefinedToggle)[isToggleChecked ? 'enable' : 'disable']();
+    }
+
+    if (toolbarElem.is('.flex-toolbar')) {
+      moreButtonElem[isToggleChecked ? 'removeClass' : 'addClass']('hidden');
+    } else {
+      toolbarElem[isToggleChecked ? 'removeClass' : 'addClass']('no-actions-button');
+    }
+    rebuild();
+  }
+
+  $('body').on('initialized', function() {
+    toolbarAPI = toolbarElem.data(toolbarElem.is('.flex-toolbar') ? 'toolbar-flex' : 'toolbar');
+
+    textField.add(eyebrowField).on('input.test', function() {
+      updateHeaderText();
+    });
+
+    eyebrowToggle.on('change.test', function() {
+      if ($(this).prop('checked')) {
+        eyebrowField.prop('disabled', false);
+      } else {
+        eyebrowField.prop('disabled', true);
+      }
+
+      updateHeaderText();
+    });
+
+    titleButtonToggle.on('change.test', function() {
+      updateTitleButton();
+    });
+
+    searchfieldToggle.add(searchfieldCollapseToggle).add(searchfieldClearableToggle).on('change.test', function() {
+      updateSearchfield();
+    });
+
+    moreButtonToggle.on('change.test', function(e) {
+      updateMoreButton(e);
+    });
+
+    function updateOnChange(toggleBtn, targetElem) {
+      if (toggleBtn.prop('checked')) {
+        targetElem.removeClass('hidden');
+        toolbarElem.trigger('updated');
+        return;
+      }
+      targetElem.addClass('hidden');
+      toolbarElem.trigger('updated');
+    }
+
+    settingsToggle.on('change.test', function() {
+      updateOnChange(settingsToggle, settingsBtn);
+    });
+
+    filterToggle.on('change.test', function() {
+      updateOnChange(filterToggle, filterBtn);
+    });
+
+    deleteToggle.on('change.test', function() {
+      updateOnChange(deleteToggle, deleteBtn);
+    });
+  });
+</script>

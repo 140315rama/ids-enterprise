@@ -1,0 +1,31 @@
+<div class="row top-padding">
+  <div class="six columns">
+
+    <h2>Tree Control: Add/Remove to Empty</h2>
+
+    <p>In this code a node is added and then removed from the tree making it empty. This example is working if its an empty page.</p>
+
+  </div>
+</div>
+
+<div class="row top-padding">
+  <div class="twelve columns">
+
+    <ul role="tree" id="addnode-tree" aria-label="Asset Types" class="tree" data-init="false">
+
+    </ul>
+
+  </div>
+</div>
+
+<script>
+  var elem = $('#addnode-tree').tree();
+
+  //Add at Root
+  var api = elem.data('tree');
+
+  api.addNode({text: 'New Item 1', id: 'new1'});
+  api.removeNode({id: 'new1'});
+
+  console.log(api.settings.dataset);
+</script>

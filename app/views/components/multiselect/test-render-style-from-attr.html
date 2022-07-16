@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="six columns">
+
+    <h2>Multiselect Test: Rendering Style Types</h2>
+    <br/>
+    <p>
+      Define the render style from HTML property.
+    </p>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="four columns">
+
+    <div class="field">
+      <label for="move-to-top">Towns</label>
+      <select id="move-to-top" name="move-to-top" class="multiselect" data-init="false" multiple="true" data-move-selected="true"></select>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  $('body').on('initialized', function() {
+    function townsSource(response, term) {
+      $.getJSON('{{basepath}}api/towns', function(data, term) {
+        response(data);
+      });
+    }
+
+    $('#move-to-top').multiselect({
+      source: townsSource
+    });
+  });
+</script>

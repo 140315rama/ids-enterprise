@@ -1,0 +1,178 @@
+
+<div class="page-contents scrollable">
+
+  <div class="row">
+    <div class="six columns">
+       <div class="widget auto-height">
+         <div class="widget-header">
+          <h2 class="widget-title">Facility</h2>
+         </div>
+         <div class="widget-content">
+          <div id="pie-facility" class="chart-container">
+          </div>
+        </div>
+       </div>
+     </div>
+     <div class="six columns">
+       <div class="widget auto-height">
+         <div class="widget-header">
+          <h2 class="widget-title">Ship To </h2>
+         </div>
+         <div class="widget-content">
+           <div id="pie-ship-to" class="chart-container">
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+   <div class="row">
+     <div class="six columns">
+       <div class="widget auto-height">
+         <div class="widget-header">
+          <h2 class="widget-title">Supplier</h2>
+         </div>
+         <div class="widget-content">
+           <div id="pie-supplier" class="chart-container">
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="six columns">
+      <div class="widget auto-height">
+        <div class="widget-header">
+          <h2 class="widget-title">Reason</h2>
+        </div>
+        <div class="widget-content">
+          <div id="pie-reason" class="chart-container">
+          </div>
+        </div>
+      </div>
+    </div>
+   </div>
+  <div class="row">
+    <div class="six columns">
+      <div class="widget auto-height">
+      <div class="widget-header">
+        <h2 class="widget-title">Carrier</h2>
+      </div>
+      <div class="widget-content">
+        <div id="pie-carrier" class="chart-container">
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="six columns">
+      <div class="widget auto-height">
+        <div class="widget-header">
+          <h2 class="widget-title">Expeditor</h2>
+        </div>
+        <div class="widget-content">
+          <div id="pie-expeditor" class="chart-container">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="six columns">
+      <div class="widget auto-height">
+        <div class="widget-header">
+          <h2 class="widget-title">Authorized By</h2>
+        </div>
+        <div class="widget-content">
+          <div id="pie-authorized-by" class="chart-container">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ <script>
+ $('body').on('initialized', function () {
+
+  //Facility
+   var facilityChartData = [{
+    data: [{
+      name: 'BALLY TECHNOLOGIES, INC',
+      value: 2220.0
+     }]
+   }];
+   $('#pie-facility').chart({type: 'pie', dataset: facilityChartData, legendPlacement: 'bottom'});
+
+   //Ship To
+   var shipToChartData = [{
+    data: [{
+      name: 'BALLY TECHNOLOGIES, INC.',
+      value: 2220.0
+    }]
+   }];
+
+   $('#pie-ship-to').chart({type: 'pie', dataset: shipToChartData, legendPlacement: 'bottom', format: '0.1%'});
+
+   //Suppliers
+   var supplierChartData = [{
+      data: [{
+            name: 'Owen Precision',
+            value: 2220.0
+      }, {
+            name: 'Amys Amazing Machines',
+            value: 0.0
+      }]
+     }];
+
+   $('#pie-supplier').chart({type: 'pie', dataset: supplierChartData, legendPlacement: 'bottom', format: '0.1%'});
+
+   //Reasons
+   var reasonChartData = [{
+      data: [{
+          name: 'reason1 1',
+          value: 2220.0
+      }],
+      name: 'reason1 1'
+     }];
+
+   $('#pie-reason').chart({type: 'pie', dataset: reasonChartData, legendPlacement: 'bottom', format: '0.1%'});
+
+   //Carriers
+   var carrierChartData = [{
+      data: [{
+          name: 'c1',
+          value: 2220.0
+      }],
+      name: 'c1'
+    }];
+
+   $('#pie-carrier').chart({type: 'pie', dataset: carrierChartData, legendPlacement: 'bottom', format: '0.1%'});
+
+   //Expeditors
+   var expeditorChartData = [{
+      data: [{
+          name: 'John Church',
+          value: 2100.0
+      }, {
+            name: 'Bruce Beattie',
+            value: 120.0
+      }]
+    }];
+
+   $('#pie-expeditor').chart({type: 'pie', dataset: expeditorChartData, legendPlacement: 'bottom', format: '0.1%'});
+
+   //Authorized by
+   var authorizedByChartData = [{
+      data: [{
+          name: 'gg',
+          value: 2100.0
+      }, {
+          name: 'g',
+          value: 120.0
+      }, {
+          name: 'amy',
+          value: 0.0
+      }]
+    }];
+
+   $('#pie-authorized-by').chart({type: 'pie', dataset: authorizedByChartData, legendPlacement: 'bottom', format: '0.1%'});
+
+  });
+ </script>
+ </div>

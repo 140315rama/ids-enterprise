@@ -1,0 +1,24 @@
+
+<div class="page-container two-column fixed splitter-container">
+
+  <section class="main">
+    <div class="content scrollable">
+    </div>
+  </section>
+
+  <nav class="sidebar scrollable">
+    <div class="content">
+      <div id="splitter" class="splitter"></div>
+    </div>
+  </nav>
+
+</div>
+
+<script>
+$('#splitter').splitter({
+  attributes: [
+    { name: 'id', value: 'splitter-id-1' },
+    { name: 'data-automation-id', value: 'splitter-automation-id-1' }
+  ]
+});
+</script>

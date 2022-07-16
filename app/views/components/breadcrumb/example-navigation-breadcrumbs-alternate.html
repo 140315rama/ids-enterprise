@@ -1,0 +1,21 @@
+<div class="page-container scrollable-flex" role="main">
+  <section class="scrollable-flex-header has-alternate-breadcrumb">
+    <div id="test-breadcrumb" class="breadcrumb alternate">
+      <ol aria-label="breadcrumb"></ol>
+    </div>
+  </section>
+  <section class="scrollable-flex-content">
+    <div class="content"></div>
+  </section>
+</div>
+
+<script id="test-script">
+  $('body').on('initialized', function () {
+    const $el = $('#test-breadcrumb');
+    $.getJSON('{{basepath}}api/breadcrumbs-demos', function(breadcrumbData) {
+      $el.breadcrumb({
+        breadcrumbs: breadcrumbData
+      });
+    });
+  });
+</script>

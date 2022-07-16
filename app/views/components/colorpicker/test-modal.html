@@ -1,0 +1,49 @@
+
+<div class="row">
+  <div class="twelve columns">
+
+    <button class="btn-secondary" type="button" id="add-comment">Show Modal with Color Picker</button><br><br>
+
+    <div id="modal-edit-color" style="display: none;">
+
+      <div class="field">
+        <label for="color1">Choose Foreground Color</label>
+        <input class="colorpicker" id="color1" type="text" />
+      </div>
+
+      <div class="field">
+        <label for="color1">Choose Background Color</label>
+        <input class="colorpicker" id="color2" type="text" />
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+<script>
+
+  $('#add-comment').on('click', function () {
+    $('body').modal({
+      title: 'Set Colors',
+      content: $('#modal-edit-color'),
+      buttons: [{
+        text: 'Cancel',
+        click: function(e, modal) {
+          modal.close();
+        }
+      }, {
+        text: 'Save',
+        click: function(e, modal) {
+          modal.close();
+        },
+        validate: false,
+        isDefault: true
+      }]
+    }).on('destroy', function() {
+      console.log('destroy fired');
+    });
+  });
+
+</script>

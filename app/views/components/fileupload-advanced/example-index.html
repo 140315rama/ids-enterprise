@@ -1,0 +1,26 @@
+
+<div class="row">
+  <div class="four columns">
+
+    <div class="fileupload-advanced" data-init="false">
+    </div>
+
+  </div>
+</div>
+
+<script>
+  $('body').on('initialized', function() {
+    $('.fileupload-advanced').fileuploadadvanced({
+      attributes: [
+        {
+          name: 'id',
+          value: 'fileupload-advanced'
+        },
+        {
+          name: 'data-automation-id',
+          value: 'fileupload-advanced-automation-id'
+        }
+      ]
+    })
+  });
+</script>

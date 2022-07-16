@@ -1,0 +1,62 @@
+<div class="page-contents">
+  <div class="row">
+    <div class="twelve columns">
+      <button class="btn-secondary" type="button" id="show-toast-top-left">Show Toast Top left</button>
+      <button class="btn-secondary" type="button" id="show-toast-top-right">Show Toast Top Right</button>
+      <button class="btn-secondary" type="button" id="show-toast-bottom-left">Show Toast Bottom Left</button>
+      <button class="btn-secondary" type="button" id="show-toast-bottom-right">Show Toast Bottom Right</button>
+      <button class="btn-secondary" type="button" id="show-toast-big-text">Show Toast Long Text</button>
+      <button class="btn-secondary" type="button" id="toast-destroy">Toast Destroy</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  var counter = 0;
+
+  function getSettings(position) {
+    counter++;
+    return {
+      title: 'Application Offline ('+ counter +')',
+      message: 'This is a Toast message.',
+      position: position
+    };
+  }
+
+  $('#show-toast-top-left').on('click', function() {
+    var settings = getSettings('top left');
+    $('body').toast(settings);
+  });
+
+  $('#show-toast-top-right').on('click', function() {
+    var settings = getSettings('top right');
+    $('body').toast(settings);
+  });
+
+  $('#show-toast-bottom-left').on('click', function() {
+    var settings = getSettings('bottom left');
+    $('body').toast(settings);
+  });
+
+  $('#show-toast-bottom-right').on('click', function() {
+    var settings = getSettings('bottom right');
+    $('body').toast(settings);
+  });
+
+  $('#show-toast-big-text').on('click', function() {
+    counter++;
+    var settings = {
+      title: 'Longer Application Offline ('+ counter +')',
+      position: 'bottom right',
+      message: 'This is a Toast message that is much longer. It is so long it might wrap but that does not cause any issues.'
+    };
+    $('body').toast(settings);
+  });
+
+  $('#toast-destroy').on('click', function() {
+    var toastApi = $('body').data('toast');
+    if (toastApi) {
+      toastApi.destroy();
+    }
+  });
+</script>

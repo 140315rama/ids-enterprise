@@ -1,0 +1,63 @@
+
+<div class="row">
+  <div class="full column center">
+    <div id="bullet-example1" class="chart-container">
+    </div>
+     <div id="bullet-example2" class="chart-container">
+    </div>
+  </div>
+</div>
+
+<script>
+$('body').on('initialized', function () {
+  var initCharts = function () {
+    var palette = Soho.theme.themeColors().palette;
+    //Example 1
+    var dataset1 = [{
+        data: [
+          {'title': 'Revenue','subtitle': 'US$, in thousands','ranges': [150, 225, 300, 400, 600], 'measures': [220,270], 'markers': [250], url: 'http://someplace.com',
+            tooltip: ['<b>Poor</b> 150', '<b>Ok</b> 225', '<b>Good</b> 300', '<b>Excellent</b> 400', '<b>Revenue</b> 600']}
+        ],
+        barColors: [
+          palette.turquoise[Soho.theme.new ? '20': '10'].value,
+          palette.turquoise[Soho.theme.new ? '30': '30'].value,
+          palette.turquoise[Soho.theme.new ? '60': '50'].value,
+          palette.turquoise[Soho.theme.new ? '80': '70'].value,
+          palette.turquoise[Soho.theme.new ? '100': '90'].value
+        ],
+        lineColors: ['#000000', '#000000', '#000000'],
+        markerColors: ['#000000'],
+        attributes: [
+          { name: 'id', value: 'bullet-example1' },
+          { name: 'data-automation-id', value: 'automation-id-bullet-example1' }
+        ]
+      }];
+
+    $('#bullet-example1').chart({type: 'bullet', dataset: dataset1})
+      .on('selected', function(e, ui, data) {
+        console.log(e, ui, data);
+      });
+
+     //Example 2
+     var dataset2 = [{
+        data: [
+          {'title': 'Profit', 'subtitle': '%', 'ranges': [20,25,30], 'measures': [17,21], 'markers': [26]}
+        ],
+        barColors: [
+          palette.azure[Soho.theme.new ? '30': '20'].value,
+          palette.azure[Soho.theme.new ? '50': '40'].value,
+          palette.azure[Soho.theme.new ? '70': '60'].value
+        ],
+        lineColors: ['#000000', '#000000', '#000000'],
+        markerColors: ['#000000']
+      }];
+
+    $('#bullet-example2').chart({type: 'bullet', dataset: dataset2});
+  };
+
+  $('html').on('themechanged', function() {
+    initCharts();
+  });
+  initCharts();
+});
+</script>

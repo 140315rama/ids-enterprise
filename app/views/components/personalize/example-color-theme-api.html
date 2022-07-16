@@ -1,0 +1,91 @@
+<div class="page-container no-scroll">
+  <header class="header is-personalizable">
+    <div class="toolbar">
+      <div class="title">
+        <h1>Theme & Color Names API</h1>
+      </div>
+
+      <div class="buttonset">
+      </div>
+    </div>
+  </header>
+
+  <div id="maincontent" class="page-container scrollable" role="main">
+    <div class="row top-padding">
+      <div class="twelve columns">
+        <div class="field">
+          <label for="example-theme">Theme</label>
+          <select id="example-theme" name="example-theme" class="dropdown" data-init="false">
+          </select>
+        </div>
+        <div class="field">
+          <label for="example-colors">Theme Colors</label>
+          <select id="example-colors" name="example-colors" class="dropdown" data-init="false">
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('body').on('initialized', function () {
+    const PERSONALIZE_API = $('html').data('personalize');
+    const $html = $('html');
+
+    // Set up theme dropdown
+    var themeDropdown = $('#example-theme');
+    var themes = Soho.theme.themes();
+    var themeHtml = '';
+    for (var i = 0; i < themes.length; i++){
+       themeHtml += '<option value="' + themes[i].id + '">'+ themes[i].name +'</option>';
+    }
+
+    themeDropdown
+      .on('selected', function (e, args) {
+        const themeName = this.options[this.selectedIndex].getAttribute('value');
+        $html.data('personalize').setTheme(themeName);
+      })
+      .html(themeHtml)
+      .dropdown()
+        .val(Soho.theme.currentTheme.id)
+        .trigger('updated');
+
+    $html.on('themechanged', function (e, args) {
+      themeDropdown.val(args.theme).trigger('updated');
+      updateColorDropdown();
+      PERSONALIZE_API.setColorsToDefault('default');
+    });
+
+    // Set up colors dropdown
+    const colorsDropdown = $('#example-colors');
+
+    const updateColorDropdown = function () {
+      let colors = Soho.theme.personalizationColors();
+      let colorsHtml = '';
+      for (color in colors) {
+        colorsHtml += '<option data-icon="{icon: \'swatch\', class: \'' + colors[color].backgroundColorClass +' swatch\'}" value="' + colors[color].id + '" data-hex="' + colors[color].value + '">'+ colors[color].name +'</option>';
+      }
+
+      colorsDropdown
+        .html(colorsHtml)
+        .dropdown()
+          .trigger('updated');
+    }
+
+    colorsDropdown.on('selected', function (e, args) {
+        var val = this.options[this.selectedIndex].value;
+        if (val === 'default') {
+          PERSONALIZE_API.setColorsToDefault(val);
+        } else {
+          PERSONALIZE_API.setColors(this.options[this.selectedIndex].getAttribute('data-hex'));
+        }
+      });
+
+    updateColorDropdown();
+
+    $html.on('colorschanged', function (e, args) {
+      console.log('colorschanged', args)
+    });
+  });
+</script>

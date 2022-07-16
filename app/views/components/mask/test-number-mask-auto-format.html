@@ -1,0 +1,30 @@
+<div class="row top-padding">
+  <div class="six columns">
+
+    <h2>Mask Test: Number Auto Formatting</h2>
+    <br/>
+    <p></p>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="twelve columns">
+
+    <div class="field">
+      <label for="input-masked-number">Number</label>
+      <input id="input-masked-number" inputmode="numeric" data-mask data-options="{ 'process': 'number', 'patternOptions': { 'allowThousandsSeparator': true, 'allowDecimal': true, 'integerLimit': 4, 'decimalLimit': 2 } }" placeholder="#,###.00"/>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  $('body').on('initialized', function() {
+    $('#input-masked-number').on('focusout.test', function() {
+      var val = $(this).val();
+      val = Locale.formatNumber(val, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+      $(this).val(val);
+    });
+  });
+</script>

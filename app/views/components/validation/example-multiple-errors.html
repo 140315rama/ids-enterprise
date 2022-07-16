@@ -1,0 +1,137 @@
+<div class="row">
+  <div class="twelve columns">
+
+    <div class="field">
+      <label class="required label" for="username-display">Username</label>
+      <input class="lookup" name="username-display" id="username-display" autocomplete="off" data-validate="required"  />
+    </div>
+
+    <div class="field">
+      <label class="required label" for="states">States</label>
+      <select id="states" data-validate="required" name="states" class="dropdown">
+        <option value="" selected="true">&nbsp;</option>
+        <option value="AL" >Alabama</option>
+        <option value="DE">Delaware</option>
+        <option value="DC">District Of Columbia</option>
+        <option value="FL">Florida</option>
+        <option value="GA">Georgia</option>
+        <option value="HI">Hawaii</option>
+        <option value="ID">Idaho</option>
+        <option value="OK">Oklahoma</option>
+        <option value="OR">Oregon</option>
+        <option value="PA">Pennsylvania</option>
+        <option value="RI">Rhode Island</option>
+        <option value="SC">South Carolina</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <input type="checkbox" class="checkbox" name="checkbox1"  id="checkbox1" data-validate="required"/>
+      <label for="checkbox1" class="checkbox-label">Checkbox<span class="required" aria-hidden="true"></span></label>
+    </div>
+
+    <div class="field">
+      <label class="required label" for="text">Text Field</label>
+      <input type="text" id="text" name="text" data-validate="required"/>
+    </div>
+
+  </div>
+</div>
+
+<div id="info-popup" class="info-popup hidden">
+  <span class="label">Description</span>
+  <p class="info-popup-description">
+    This example was added as a test for fields that have more than one error. And also to test the <code>scrollIntoView</code>
+    api method that is used to scroll to field in the page.
+  </p>
+  <span class="label">Instructions</span>
+  <ol class="info-popup-instructions">
+    <li>Click <a class="hyperlink" href="#" id="show">show error</a> to show an error. Notice there is there are two errors on the states field.</li>
+    <li>Click <a class="hyperlink" href="#" id="hide">hide error</a> to hide all errors.</li>
+    <li>Click <a class="hyperlink" href="#" id="show-again">show error</a> to show an error again.</li>
+    <li>Click <a class="hyperlink" href="#" id="goto">go to</a> error. The api function that a focused field is demonstrated.</li>
+  </ol>
+  <span class="label">Related Issues</span>
+  <p class="info-popup-related-issues">
+    <br/>
+  </p>
+  <span class="label">Source Code</span>
+  <p class="info-popup-source">
+    <a class="hyperlink" href="https://github.com/infor-design/enterprise/blob/main/app/views/components/validation/example-multiple-errors.html" target="_blank">Github Source</a><br/>
+    <a class="hyperlink" href="https://github.com/infor-design/enterprise/blob/main/test/components/validation/validation.e2e-spec.js" target="_blank">
+      Has e2e test
+      <svg class="icon icon-success" focusable="false" aria-hidden="true" role="presentation">
+        <use href="#icon-success"></use>
+      </svg>
+    </a>
+  </p>
+  <p class="info-popup-version">
+    Added in v4.7.0
+  </p>
+</div>
+
+<script>
+  $('#show, #show-again').on('click', function () {
+    $('#username-display')
+    .removeError()
+    .addError({ message: 'I have an Error.', inline: true })
+    .addError({ message: 'I have another Error.', inline: true });
+
+    $('#states')
+    .removeError()
+    .addError({ message: 'Dropdown is in Error.', inline: true })
+
+    $('#checkbox1')
+    .removeError()
+    .addError({ message: 'Checkbox is in Error.', inline: true })
+  });
+
+  $('#hide').on('click', function () {
+    console.log(['Username data-errormessage =', $('#username-display').data('data-errormessage') ]);
+    console.log(['States data-errormessage =', $('#states').data('data-errormessage') ]);
+    console.log(['Checkbox data-errormessage =', $('#checkbox1').data('data-errormessage') ]);
+    console.log(['Text data-errormessage =', $('#text').data('data-errormessage') ]);
+
+    console.log(['Username .getMessage() =', $('#username-display').getMessage() ]);
+    console.log(['States .getMessage() =', $('#states').getMessage() ]);
+    console.log(['Checkbox .getMessage() =', $('#checkbox1').getMessage() ]);
+    console.log(['Text .getMessage() =', $('#text').getMessage() ]);
+
+    // only remove the error if it exists
+    if ($('#username-display').getMessage().length > 0) {
+      $('#username-display').removeError();
+    }
+
+    // only remove the error if it exists
+    if ($('#states').getMessage()) {
+      $('#states').removeError();
+    }
+
+    // only remove the error if it exists
+    if ($('#checkbox1').getMessage()) {
+      $('#checkbox1').removeError();
+    }
+
+    // only remove the error if it exists
+    if ($('#text').getMessage()) {
+      $('#text').removeError();
+    }
+  });
+
+  $('#goto').button().on('click', function () {
+    if ($('#username-display').getMessage().length > 0) {
+      $('#username-display').scrollIntoView(false);
+    } else if ($('#states').getMessage().length > 0) {
+      // should scroll the element into view at the top of the view port
+      $('#states').scrollIntoView(true);
+    } else if ($('#text').getMessage().length > 0) {
+      $('#text').scrollIntoView(false);
+    } else if ($('#checkbox1').getMessage().length > 0) {
+      $('#checkbox1').scrollIntoView(true);
+    }
+  });
+
+  $("#states, #username-display, #checkbox1, #text").on('valid error', function (event, validation) {
+    console.log([event.currentTarget.id, event.type, validation.field.prop('tagName') ]);
+  });
+</script>

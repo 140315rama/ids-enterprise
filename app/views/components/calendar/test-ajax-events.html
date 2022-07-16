@@ -1,0 +1,50 @@
+<div class="calendar" data-init="false">
+  <div class="calendar-events">
+    <div class="accordion" data-options="{'allowOnePane': false}">
+      <div class="accordion-header is-expanded">
+        <a href="#"><span data-translate="text">Legend</span></a>
+      </div>
+      <div class="accordion-pane">
+        <div class="calendar-event-types accordion-content">
+        </div>
+      </div>
+      <div class="accordion-header is-expanded">
+        <a href="#"><span data-translate="text">UpComing</span></a>
+      </div>
+      <div class="accordion-pane">
+        <div class="calendar-upcoming-events accordion-content">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="calendar-monthview">
+  </div>
+  <div class="calendar-weekview">
+  </div>
+  <div class="calendar-event-details">
+  </div>
+</div>
+
+<script>
+  $('body').one('initialized', function () {
+    $('.calendar').calendar({
+      month: 7,
+      year: 2018,
+      iconTooltip: 'status',
+      eventTooltip: 'comments',
+      onRenderMonth: function (ui, response, args) {
+        // Get both event types and events for the month (eventTypes can be passed initially)
+        const events = $.get('{{basepath}}api/events');
+        const eventTypes = $.get('{{basepath}}api/event-types');
+        console.log('Render for Year: ' + args.year + ' Month: ' + args.month )
+        $.when(events, eventTypes).done(function completed(events, eventTypes) {
+          setTimeout(function () {
+            response(events[0], eventTypes[0]);
+          }, 500); //slow it down a bit more
+        });
+      }
+    }).on('contextmenu', function (e, args) {
+      console.log('contextmenu fired', args);
+    });
+  });
+</script>

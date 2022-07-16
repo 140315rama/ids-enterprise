@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="six columns">
+    <h2>Tooltip Test: XSS Security</h2>
+    <p>The tooltip is now protected from script injection. If you hover the tooltip, you should not see a alert and everything should be kosher.</p>
+    <p></p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="six columns">
+    <button class="btn-secondary" type="button"
+      title="Tooltips Provide<br> Additional Information<script>confirm('hacked!');</script>">Normal Tooltip
+    </button>
+  </div>
+</div>

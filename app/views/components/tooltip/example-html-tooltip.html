@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="six columns">
+    <h2>Tooltip Test: HTML Tooltip</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="twelve columns">
+
+    <div class="row top-padding">
+      <div class="six columns">
+        <button class="btn-secondary" id="button1" type="button">Custom HTML Tooltip</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  document.getElementById('button1').setAttribute('title',
+    '<span style="text-align: right; display: inline-block;"><b style="line-height: 1.7em;">Connected order</b><br>Tooltips Provide <br> <span style="color: #AFDC91;">Additional Information</span>.</span>');
+</script>

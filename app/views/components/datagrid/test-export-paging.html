@@ -1,0 +1,93 @@
+<div class="row">
+  <div class="twelve columns">
+    <br />
+    <h3>Grid Example: Core</h3>
+    <p>
+    Shows how to expose the export to excel functionality works with paging. All pages should be exported when paging client side.
+
+    </p>
+    <hr class="fieldset-hr"/>
+  </div>
+</div>
+
+<div class="row">
+  <div class="twelve columns">
+
+    <div class="toolbar" role="toolbar">
+      <div class="title">
+        Compressors
+        <span class="datagrid-result-count">(10 Results)</span>
+      </div>
+      <div class="buttonset">
+        <button type="button" class="btn" id="export">
+          <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+            <use href="#icon-export-spreadsheet"></use>
+          </svg>
+          <span>Export</span>
+        </button>
+      </div>
+
+      <div class="more">
+        <button type="button" class="btn-actions">
+          <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+            <use href="#icon-more"></use>
+          </svg>
+          <span class="audible">More Actions</span>
+        </button>
+        <ul class="popupmenu">
+          <li><a data-option="personalize-columns" href="#">Personalize Columns</a></li>
+          <li><a data-option="reset-layout" href="#">Reset to Default</a></li>
+          <li class="separator"></li>
+          <li class="heading">Row Height</li>
+          <li class="is-selectable"><a data-option="row-extra-small" href="#" data-translate="text">ExtraSmall</a></li>
+          <li class="is-selectable"><a data-option="row-small" href="#" data-translate="text">Small</a></li>
+          <li class="is-selectable"><a data-option="row-medium" href="#" data-translate="text">Medium</a></li>
+          <li class="is-selectable is-checked"><a data-option="row-large" href="#" data-translate="text">Large</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="datagrid">
+    </div>
+
+  </div>
+</div>
+
+<script>
+  $('body').one('initialized', function () {
+
+      var grid,
+        columns = [];
+
+      //Define Columns for the Grid.
+      columns.push({ id: 'id', name: 'Id', field: 'id', formatter: Formatters.Readonly, filterType: 'text', filterDisabled: true});
+      columns.push({ id: 'productId', name: 'Product Id', field: 'productId', formatter: Formatters.Readonly, filterType: 'text'});
+      columns.push({ id: 'productName', name: 'Product Name', field: 'productName', formatter: Formatters.Hyperlink, filterType: 'text'});
+      columns.push({ id: 'activity', name: 'Activity', field: 'activity', filterType: 'contents'});
+      columns.push({ id: 'quantity', name: 'Accuml. Quantity', field: 'quantity', align: 'right', filterType: 'integer'});
+      columns.push({ id: 'orderDate', name: 'Order Date', field: 'orderDate', formatter: Formatters.Date, dateFormat: 'MM/dd/yyyy', filterType: 'date'});
+
+      //Get some data via ajax
+      var url = '{{basepath}}api/compressors?pageNum=1&pageSize=100';
+
+      $.getJSON(url, function(res) {
+        //Show the grid
+        grid = $('#datagrid').datagrid({
+          columns: columns,
+          dataset: res.data,
+          selectable: 'single',
+          paging: true,
+          filterable: true,
+          pagesize: 10,
+          toolbar: {title: 'Compressors', results: true, dateFilter: false , keywordFilter: true, actions: true, views: true, rowHeight: true}
+          }).on('selected', function (e, args) {
+            console.log(args);
+          }).data('datagrid');
+
+      });
+
+      $('#export').on('click', function () {
+        grid.exportToExcel('myExport');
+      });
+
+ });
+</script>

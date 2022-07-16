@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="six columns">
+    <h2>Dropdown Test: Allows custom keystoke</h2>
+    <p>This is a demo where a user will  not be able to used the enter key from opening the list, but able to accept, select the value highlighted when it is open</p>
+    <p>Will also disabled thed down arrows on selecting a value in the dropdown</p>
+    <p>You can use the onKeyDown function to override keys if you need to.</p>
+  </div>
+</div>
+
+<div class="row top-padding">
+  <div class="six columns">
+
+    <div class="field">
+      <label for="dropdown" class="label">Dropdown allows custom keystroke</label>
+      <select id="dropdown" name="dropdown" class="dropdown">
+        <option value="FE1">Fire Level E1</option>
+        <option value="FE2">Fire Level E2</option>
+        <option value="FE3">Fire Level E3</option>
+        <option value="FE4">Fire Level E4</option>
+        <option value="FE5">Fire Level E5</option>
+      </select>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  $('body').one('initialized', function () {
+
+    $('#dropdown').dropdown({
+      onKeyDown: function (e) {
+        if (e.which === 40) { // down key
+          console.log('You customized the down key (:');
+          return false;
+        }
+        if (e.which === 13) { // enter key
+          console.log('Disabled Enter key!');
+          if ($('#dropdown-list').is(':visible')) {
+            return;
+          }
+          return false;
+        }
+      }
+    })
+
+  });
+</script>

@@ -1,0 +1,44 @@
+<div class="tag-list">
+  <span id="tagged" class="tag">#Tagged</span>
+  <span id="tagged-secondary" class="tag secondary">#Tagged</span>
+  <span id="tagged-info" class="tag info is-dismissible">#Info</span>
+  <span id="tag-error" class="tag error is-dismissible"><span class="audible">Error</span>Delayed</span>
+  <span id="tag-open-order" class="tag good is-dismissible">Open Order</span>
+  <span id="tag-help-order" class="tag alert is-dismissible"><span class="audible">Alert</span>Help Order</span>
+  <a id="tag-linkable" href="#" class="tag is-linkable">#Clickable</a>
+  <span id="tag-dismissible" href="#" class="tag is-dismissible">#Dismissible</span>
+</div>
+
+<div class="tag-list">
+  <a id="admin-asst" href="#" class="tag secondary is-dismissible">#Administrative Assistant</a>
+  <a id="office-manager" href="#" class="tag secondary is-dismissible">#Office Manager </a>
+  <a id="us-mn" href="#" class="tag secondary is-dismissible">#US:MN:St. Paul</a>
+  <a id="full-time" href="#" class="tag secondary is-dismissible">#Full-Time</a>
+  <a id="marketing" href="#" class="tag secondary is-dismissible">#Marketing</a>
+  <a id="000453" href="#" class="tag secondary is-dismissible">#000453</a>
+</div>
+
+<script>
+  var tempID,
+    output = $('#output'),
+    msg = function(str) {
+      return '<span style="display: block; font-size: 1.4rem; margin-bottom: 0.5rem;">'+ str +'</span>';
+    };
+
+  $('.is-dismissible')
+    // Before Remove
+    .on('beforetagremove', function(e, arg) {
+      tempID = arg.element.attr('id');
+      output.prepend(msg('Before Remove: '+ tempID));
+      arg.event.preventDefault();
+    })
+    // After Remove: Need to check on parent, because tag is removed at this point
+    .parent().on('aftertagremove', function() {
+      output.prepend(msg('After Remove: '+ tempID));
+    });
+
+    $('.is-linkable').on('click', function(e) {
+      output.prepend(msg('Tag Clicked: '+ this.id));
+      e.preventDefault();
+    });
+</script>

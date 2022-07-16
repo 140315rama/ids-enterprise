@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="six columns">
+
+    <h2>Toolbar Test: Click Handlers and Rebuilding</h2>
+    <p></p>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="twelve columns">
+
+    <div id="click-handler-toolbar" class="toolbar">
+      <div class="title"></div>
+      <div class="buttonset">
+        <button type="button" class="btn" id="button-one">
+          <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+            <use href="#icon-settings"></use>
+          </svg>
+          <span>Button One</span>
+        </button>
+
+        <button type="button" class="btn" id="button-two">
+          <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+            <use href="#icon-download"></use>
+          </svg>
+          <span>Button Two</span>
+        </button>
+
+        <button type="button" class="btn" id="button-three">
+          <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+            <use href="#icon-tack"></use>
+          </svg>
+          <span>Button Three</span>
+        </button>
+      </div>
+    </div>
+
+    <fieldset>
+      <button type="button" class="btn-primary" id="reinvoke-toolbar">Reinvoke Toolbar</label>
+    </fieldset>
+
+  </div>
+</div>
+
+<script>
+  $('body').on('initialized', function() {
+    $('#button-two').on('click.test', function() {
+      $('body').toast({title: 'Button Clicked!', message: 'Your button click event works!'});
+    });
+
+    $('#reinvoke-toolbar').on('click.test', function() {
+      $('#click-handler-toolbar').toolbar();
+      $('body').toast({title: 'Toolbar Reinvoked!', message: 'The toolbar control on this page was reinvoked!'});
+    });
+  });
+</script>

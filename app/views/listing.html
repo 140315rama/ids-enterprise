@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="six columns">
+
+    <ul class="directory-listing link-list">
+      {{#paths}}
+        <li>
+          {{#icon}}
+            <svg class="icon {{type}}" focusable="false" aria-hidden="true" role="presentation">
+              <use href="{{icon}}"></use>
+            </svg>
+            &nbsp;
+          {{/icon}}
+          {{^icon}}
+            {{#pageType}}
+              <span class="badge test-type {{labelColor}}">
+                {{pageType}}
+              </span>
+              &nbsp;
+            {{/pageType}}
+          {{/icon}}
+          <a class="hyperlink" href="{{href}}">
+            <span>{{text}}</span>
+          </a>
+        </li>
+      {{/paths}}
+    </ul>
+
+  </div>
+</div>

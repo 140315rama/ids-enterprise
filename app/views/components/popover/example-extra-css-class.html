@@ -1,0 +1,50 @@
+<style id="special-test-rules">
+  .green {
+    background-color: #d5f6c0 !important;
+    box-shadow: none !important;
+  }
+
+  .green .arrow::after {
+    border-right-color: #d5f6c0 !important;
+  }
+
+  .white-text,
+  .white-text p {
+    color: #000000 !important;
+  }
+</style>
+
+<div class="row top-padding">
+  <div class="six columns">
+    <h2>Popover Test: Extra CSS Class</h2>
+    <p>This demonstrates adding extra CSS classes to the tooltip markup by passing a setting through its constructor, `extraClass`.</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="twelve columns">
+
+    <div class="field">
+      <button id="tooltip-btn" class="btn-secondary">
+        <span>Click Me</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  var POPOVER_OPTIONS = {
+    trigger: 'immediate',
+    content: '<div id="popover-contents" class="hidden"><p>Purchase <strong>2</strong> more to save!</p></div>',
+    extraClass: 'green white-text',
+    placement: 'right',
+    popover: true,
+    offset: {
+      x: 10
+    }
+  };
+
+  $('#tooltip-btn').on('click', function () {
+    $('#tooltip-btn').popover(POPOVER_OPTIONS);
+  });
+</script>

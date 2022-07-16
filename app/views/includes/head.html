@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <title>
+    {{#subtitle}}
+      {{subtitle}} |
+    {{/subtitle}}
+    {{title}}
+  </title>
+
+  <!-- Meta Info -->
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="version" content="{{version}}"/>
+  <meta name="commit" content="{{commit}}"/>
+
+  <script src="{{basepath}}js/jquery-3.6.0.js"></script>
+  {{^noD3}}
+  <script src="{{basepath}}js/d3.v5.js"></script>
+  {{/noD3}}
+  <script src="{{basepath}}js/promise-polyfill.js"></script>
+
+  {{#SohoConfig}}
+  <script>
+    window.SohoConfig = JSON.parse('{{{SohoConfig}}}');
+    window.IDSConfig = window.SohoConfig;
+  </script>
+  {{/SohoConfig}}
+
+  {{#importStyle}}
+    {{#esModule}}
+    <script id="ids-module" type="module">
+      (async () => {
+        const moduleSpecifier = '{{basepath}}js/sohoxi.esm.js';
+        const Soho = await import(moduleSpecifier);
+
+        window.Soho = Soho;
+      })();
+    </script>
+    {{/esModule}}
+    {{^esModule}}
+      <script src="{{basepath}}js/sohoxi.{{importStyle}}.js"></script>
+      <script src="{{basepath}}js/sohoxi-migrate-4.4.0.js"></script>
+    {{/esModule}}
+  {{/importStyle}}
+  {{^importStyle}}
+    <script src="{{basepath}}js/sohoxi.js"></script>
+    <script src="{{basepath}}js/sohoxi-migrate-4.4.0.js"></script>
+  {{/importStyle}}
+
+  <!-- Supplying the culture in the head is supported
+  <script src="{{basepath}}js/sohoxi.js?v=MTIuMC4wLjAuMQ"></script>
+  <script src="../../js/cultures/{{locale}}.js"></script>-->
+
+  <link href="https://fonts.googleapis.com/css?{{fontString}}" rel="stylesheet"/>
+  <link rel="stylesheet" id="sohoxi-stylesheet" href="{{basepath}}css/theme-{{theme.name}}-{{theme.mode}}.css" type="text/css"/>
+  <script>
+    var colors;
+    var longThemeName = 'theme-{{theme.name}}-{{theme.mode}}';
+    var shortThemeName = '{{theme.name}}';
+    var blockUI = '{{layout}}'.indexOf('embedded') > -1 ? false : true;
+
+    {{#colors}}
+    colors = '{{colors}}'.split(',');
+
+    colors = {header: colors[0],
+             subheader: colors[1],
+             text: colors[2],
+             verticalBorder: colors[3],
+             horizontalBorder: colors[4],
+             inactive: colors[5],
+             hover: colors[6]};
+
+    {{/colors}}
+
+    // If Initialize isnt called need to defer this
+    var handleUrl = function(a, eventType) {
+      if (!a) {
+        return;
+      }
+
+      // Reset event type if it doesn't match up
+      var eventTypes = ['theme', 'color'];
+      if (eventType && eventTypes.indexOf(eventType) === -1) {
+        eventType === undefined;
+      }
+
+      // Setup theme if applicable
+      var queryParams = [];
+      var hasTheme = false;
+      var themeStringParts = [];
+      if ((eventType && eventType !== 'color')) {
+        hasTheme = typeof a.theme === 'string';
+        themeStringParts = a.theme.split('-');
+        queryParams.push('theme=' + themeStringParts[1]);
+        queryParams.push('mode=' + themeStringParts[2]);
+      }
+
+      // Setup color if applicable
+      var hasColor = false;
+      if (eventType && eventType !== 'theme') {
+        if (typeof a.colors === 'string') {
+          hasColor = true;
+          queryParams.push('colors=' + a.colors.replace('#', ''));
+        } else if (a.colors && typeof a.colors.header === 'string') {
+          hasColor = true;
+          queryParams.push('colors=' + a.colors.header.replace('#', ''));
+        }
+      }
+
+      function stringifyParams(theseParams) {
+        var str = '';
+        theseParams.forEach(function (param) {
+          var and = '';
+          if (queryParams[0] !== param) {
+            and = '&';
+          }
+          str += and + param;
+        });
+        return str;
+      }
+
+      // Used for filtering out existing theme-related parameters from a
+      // @param {string} queryString the URL string
+      // @returns {array} of existing Parameters in string form.
+      // Example: [`locale=ar-EG`, `useFlexToolbar=true`]
+      function existingThemeParamFilter(queryString) {
+        var existingParams = window.location.search
+          .replace('?', '')
+          .split('&');
+        existingParams = existingParams.filter(function (param) {
+          if (!param || param.length < 1) {
+            return false;
+          }
+          if (hasTheme && param.indexOf('theme=') > -1) {
+            return false;
+          }
+          if (hasTheme && param.indexOf('mode=') > -1) {
+            return false;
+          }
+          if (hasTheme && param.indexOf('variant=') > -1) {
+            return false;
+          }
+          if (hasColor && param.indexOf('colors=') > -1) {
+            return false;
+          }
+          return true;
+        });
+        return existingParams;
+      }
+
+      if (queryParams.length) {
+        // Persist existing additional params.
+        // Also, overwrite existing color/theme/mode values if they've been added above.
+        queryParams = queryParams.concat(existingThemeParamFilter(window.location.search));
+
+        // Update URL in the browser window
+        var pageUrl = '?' + stringifyParams(queryParams);
+        window.history.pushState('', '', pageUrl);
+      }
+    };
+
+    $('html')
+      .personalize({
+        colors: colors,
+        theme: longThemeName,
+        blockUI: blockUI
+      })
+      .on('colorschanged', function (e, a) {
+        handleUrl(a, 'color');
+      })
+      .on('themechanged', function (e, a) {
+        const parts = a.theme.split('-');
+        handleUrl(a, 'theme');
+
+        if (parts[1] !== shortThemeName) {
+          shortThemeName = parts[1];
+          shortThemeName = shortThemeName.replace('soho', 'classic').replace('uplift', 'new');
+          var path = window.location.pathname;
+
+          if (path.indexOf('/icons/') > -1) {
+            $('body').append('<div class="personalize-overlay" style="background: rgb(240, 240, 240); opacity: 0.933013;"></div>')
+            location.reload();
+          } else {
+            $.get('{{basepath}}api/icons?theme=' + shortThemeName, function(htmlStr) {
+              htmlStr = htmlStr.replace('</div>', '');
+              htmlStr = htmlStr.replace('<div class="svg-icons">', '');
+              $('div.svg-icons').empty().append(htmlStr);
+            },'html');
+
+            $.get('{{basepath}}api/icons-empty?theme=' + shortThemeName, function(htmlStr) {
+              htmlStr = htmlStr.replace('</div>', '');
+              htmlStr = htmlStr.replace('<div class="svg-icons-empty">', '');
+              $('div.svg-icons-empty').empty().append(htmlStr);
+            },'html');
+          }
+        }
+      });
+  </script>
+
+  <link rel="stylesheet" href="{{basepath}}css/demo.css" type="text/css"/>
+</head>

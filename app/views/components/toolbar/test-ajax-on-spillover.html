@@ -1,0 +1,104 @@
+<div class="row">
+  <div class="six columns">
+    <h2>Toolbar Test: AJAX on Spillover</h2>
+    <br/>
+  </div>
+</div>
+
+<div class="row">
+  <div class="twelve columns">
+
+    <div id="ajax-toolbar" class="toolbar" data-options="{ maxVisibleButtons: 4 }">
+      <div class="title">Ajax-ified Toolbar</div>
+      <div class="buttonset">
+
+        <button id="print-button" class="btn">
+          <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+            <use href="#icon-print"></use>
+          </svg>
+          <span>Print</span>
+        </button>
+
+        <button id="settings-button" class="btn-menu">
+          <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+            <use href="#icon-settings"></use>
+          </svg>
+          <span>Settings</span>
+        </button>
+        <ul class="popupmenu is-selectable">
+          <li class="is-selectable is-checked"><a href="#">Setting #1</a></li>
+          <li class="is-selectable"><a href="#">Setting #2</a></li>
+          <li class="is-selectable"><a href="#">Setting #3</a></li>
+        </ul>
+
+        <button id="save-button" class="btn">
+          <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+            <use href="#icon-save"></use>
+          </svg>
+          <span>Save</span>
+        </button>
+
+        <button id="email-button" class="btn">
+          <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+            <use href="#icon-mail"></use>
+          </svg>
+          <span>Send via email</span>
+        </button>
+
+      </div>
+      <div class="more">
+
+        <button id="predefined-more" class="btn-actions" type="button">
+          <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+            <use href="#icon-more"></use>
+          </svg>
+          <span class="audible" data-translate="text">More</span>
+        </button>
+        <ul id="predefined-more-menu" class="popupmenu">
+          <li><a href="#">Pre-defined Option #1</a></li>
+        </ul>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  var TOP_LEVEL_POPUPMENU_CONTENT = '' +
+    '<li><a href="#">AJAX Option #1</a></li>' +
+    '<li><a href="#">AJAX Option #2</a></li>' +
+    '<li class="submenu">' +
+      '<a href="#">AJAX Option #3</a>' +
+      '<ul class="popupmenu"></ul>' +
+    '</li>' +
+    '<li><a href="#">AJAX Option #4</a></li>';
+
+  var SUB_LEVEL_POPUPMENU_CONTENT = '' +
+    '<li><a href="#">AJAX Sub-option #1</a></li>' +
+    '<li><a href="#">AJAX Sub-option #2</a></li>' +
+    '<li><a href="#">AJAX Sub-option #3</a></li>' +
+    '<li><a href="#">AJAX Sub-option #4</a></li>';
+
+  // Populate the menu with some fake content for the sake of testing the AJAX call.
+  function popupmenuBeforeOpen(response, options) {
+    if (options.contextElement) {
+      return response( $(SUB_LEVEL_POPUPMENU_CONTENT) );
+    }
+    return response( $(TOP_LEVEL_POPUPMENU_CONTENT) );
+  }
+
+  $('body').on('initialized', function() {
+    var more = $('#predefined-more');
+    var api = more.data('popupmenu');
+
+    if (api) {
+      api.settings.beforeOpen = popupmenuBeforeOpen;
+      api.updated();
+    } else {
+      more.popupmenu({
+        beforeOpen: popupmenuBeforeOpen
+      });
+    }
+  });
+</script>

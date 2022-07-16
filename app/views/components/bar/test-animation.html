@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="two-thirds column">
+    <p>
+      <span>This example uses the api setting animate: 'initial', so will only animate when resizing the page.</span>
+      <br/>
+    </p>
+    <br/>
+  </div>
+</div>
+
+<div class="row">
+  <div class="two-thirds column">
+      <div class="widget">
+        <div class="widget-header">
+          <h2 class="widget-title">Animation (Initial) Bar Chart</h2>
+        </div>
+        <div class="widget-content">
+          <div id="bar-example" class="chart-container">
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+<script>
+$('body').on('initialized', function () {
+
+ var dataset = [{
+      data: [{
+          name: 'Category A',
+          value: 373
+      }, {
+          name: 'Category B',
+          value: 372
+      }, {
+          name: 'Category C',
+          value: 236.35
+      }],
+      name: ''
+    }];
+
+  $('#bar-example').chart({type: 'bar', dataset: dataset, animate: 'initial'});
+});
+</script>

@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="six colums">
+    <p>This datagrid will have its page programmatically set to "2" after 1000ms</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="twelve columns">
+    <div id="datagrid"></div>
+  </div>
+</div>
+
+<script id="test-script">
+  $('body').one('initialized', function () {
+      var columns = [],
+        data = [],
+        pageSize = 8;
+
+      // Define Columns for the Grid
+      columns.push({ id: 'id', name: 'Id', field: 'id', formatter: Formatters.Readonly});
+      columns.push({ id: 'productId', name: 'Product Id', field: 'productId', width: 140, formatter: Formatters.Readonly});
+      columns.push({ id: 'productName', name: 'Product Name', sortable: false, field: 'productName', width: 150, formatter: Formatters.Hyperlink});
+      columns.push({ id: 'activity', hidden: true, name: 'Activity', field: 'activity', width: 125});
+      columns.push({ id: 'quantity', name: 'Quantity', field: 'quantity', width: 125});
+      columns.push({ id: 'price', name: 'Price', field: 'price', width: 125, formatter: Formatters.Decimal});
+      columns.push({ id: 'orderDate', name: 'Order Date', field: 'orderDate', formatter: Formatters.Date, dateFormat: 'M/d/yyyy'});
+
+      // Init and get the api for the grid
+      var gridAPI = $('#datagrid').datagrid({
+        columns: columns,
+        selectable: 'multiple',
+        paging: true,
+        pagesize: pageSize,
+        source: function(req, response) {
+          var url = '{{basepath}}api/compressors?pageNum='+ req.activePage +'&pageSize='+ req.pagesize;
+          $.getJSON(url, function(res) {
+            req.total = res.total;
+            response(res.data, req);
+          });
+        },
+        toolbar: {title: 'Data Grid Header Title', results: true, dateFilter: false ,keywordFilter: true, actions: true, views: true, rowHeight: true, collapsibleFilter: true}
+      }).data('datagrid');
+
+      // On a timeout, cause `triggerSource` to fire
+      setTimeout(function() {
+        gridAPI.triggerSource({
+          activePage: 2
+        });
+      }, 1000);
+  });
+</script>

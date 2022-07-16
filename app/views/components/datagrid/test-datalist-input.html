@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="twelve columns">
+     <div id="datagrid"></div>
+  </div>
+</div>
+
+<script>
+$('body').one('initialized', function () {
+ var columns = [],
+    data = [];
+
+  data.push({
+    item : "item 1",
+    qty : 2,
+    uom : "EA",
+    cost : 50.00,
+    availability : "Non stock",
+    button : "Add to Request"
+  }, {
+    item : "item 2",
+    qty : 2,
+    uom : "EA",
+    cost : 50.00,
+    availability : "Non stock",
+    button : "Add to Request"
+  }, {
+    item : "item 3",
+    qty : 2,
+    uom : "EA",
+    cost : 50.00,
+    availability : "Non stock",
+    button : "Add to Request"
+  });
+
+  inputFormatter = function(row, cell, value, col, item) {
+    var opt = col.formatterOptions || {},
+      format = function(s) {
+        return (s || '').replace(/{(\w+)}/g, function(m, p) {
+          return item[p];
+        });
+      },
+      id = (opt.prefix || 'input') + row +'-'+ cell,
+      type = opt.type || 'text',
+      beforeTemplate = format(opt.beforeTemplate),
+      afterTemplate = format(opt.afterTemplate);
+
+    return beforeTemplate +'<label for="'+ id +'" class="audible">'+ id +'</label>'+
+        '<input type="'+ type +'" id="'+ id +'" name="'+ id +'" />'+ '<span>' + afterTemplate + '</span>';
+  };
+
+  //Define Columns for the Grid.
+  columns.push({ id: 'item', name: 'Item', field: 'item'});
+  columns.push({ id: 'qty_uom1', name: 'Quantity/UOM1', field: 'qty', formatter: Formatters.Text, editor: Editors.Input});
+  columns.push({ id: 'qty_uom2', name: 'Quantity/UOM2', field: 'qty', formatter: inputFormatter, formatterOptions: {'prefix': 'uom', 'afterTemplate': '&nbsp; / {uom}', 'type': 'number'} });
+  columns.push({ id: 'cost', name: 'Cost', field: 'cost', formatter: Formatters.Integer });
+  columns.push({ id: 'availability', name: 'Available', field: 'availability'});
+  columns.push({ id: 'button', name: ' ', field: 'button', formatter: Formatters.Button, align: 'center' });
+
+  $('#datagrid').datagrid({
+    columns: columns,
+    dataset: data,
+    isList: true,
+    cellNavigation: false,
+    rowNavigation: false
+   });
+
+  });
+</script>

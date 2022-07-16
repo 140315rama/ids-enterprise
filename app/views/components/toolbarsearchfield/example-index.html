@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="twelve columns">
+
+    <div class="toolbar no-actions-button left-aligned">
+      <div class="buttonset">
+
+        <!-- Begin Toolbar Searchfield Component Part -->
+          <label for="example-toolbar-searchfield">Example</label>
+          <input id="example-toolbar-searchfield" data-automation-id="toolbar-searchfield-automation-id" class="searchfield" />
+        <!-- End Toolbar Searchfield Component Part -->
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  $('#example-toolbar-searchfield').searchfield({
+    attributes: [
+      {
+        name: 'id',
+        value: 'example-toolbar-searchfield'
+      },
+      {
+        name: 'data-automation-id',
+        value: 'example-toolbar-searchfield-automation-id'
+      }
+    ]
+  })
+</script>

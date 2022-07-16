@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="twelve columns">
+
+    <button type="button" class="btn-secondary" id="about-trigger">Show About Screen</button>
+
+  </div>
+</div>
+
+<script>
+
+  $('#about-trigger').on('click', function () {
+
+    //Show About Screen
+    $('body').about({
+      appName: 'IDS Enterprise',
+      productName: 'Controls',
+      version: 'Example Application Version No. XX',
+      content: '<p>Fashionable components for fashionable applications.</p>',
+      attributes: [
+          { name: 'id', value: 'about-modal' },
+          { name: 'data-automation-id', value: 'about-modal-automation-id' }
+      ],
+    }).on('beforeopen.about', () => {
+      console.log('beforeopen');
+    }).on('close.about', () => {
+      console.log('close');
+    }).on('afterclose.about', () => {
+      console.log('afterclose');
+    });
+
+  });
+</script>

@@ -1,0 +1,45 @@
+
+<div class="row">
+  <div class="twelve columns">
+    <div id="readonly-datagrid">
+    </div>
+  </div>
+</div>
+
+<script>
+    $('body').on('initialized', function () {
+      var grid,
+        columns = [],
+        data = [];
+
+      data.push({ id: 6, fields: {
+          productId: { value: 2642206 },
+          productName: { value: 'Some Compressor' },
+          activity: { value: 'inspect and Repair' },
+          quantity: { value: 41 },
+          price: { value: 123.99 },
+          status: { value: 'OK' },
+          orderDate: { value: new Date(2014, 6, 9) },
+          action: { value: 'On Hold' },
+          ordered: { value: 0 },
+          comment: { value: '<b>Bold</b> & <i>Italics</i>' }
+        }});
+
+      //Define Columns for the Grid.
+      columns.push({ id: 'productDesc', resizable: false, name: 'Product Desc', sortable: false, field: 'fields.productName.value', formatter: Formatters.Hyperlink});
+      columns.push({ id: 'singleline', name: 'Singleline', field: 'fields.comment.value', formatter: Formatters.Editor, editor: Editors.Editor, singleline: true, contentTooltip: true, width: 200 });
+      columns.push({ id: 'activity', name: 'Activity', field: 'fields.activity.value' });
+      columns.push({ id: 'productId', name: 'Product Id', field: 'fields.productId.value'});
+      columns.push({ id: 'price', name: 'Price', field: 'fields.price.value'});
+
+      //Init and get the api for the grid
+      $('#readonly-datagrid').datagrid({
+        columns: columns,
+        dataset: data,
+        editable: true,
+        menuId: 'grid-actions-menu',
+        rowHeight: 'short'
+      });
+    });
+
+</script>

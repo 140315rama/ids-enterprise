@@ -1,0 +1,47 @@
+<div class="row top-padding">
+  <div class="twelve columns">
+
+    <h3 class="fieldset-title">Contextual Action Panel (with full markup loaded via iframe)</h3>
+    <p>This is similar to how an expanded Ming.le context app would be shown. Note: there is currently no way to close this once open due to iframe limitations.</p>
+    <br>
+
+    <button class="btn-secondary" type="button" id="show">Show</button>
+
+  </div>
+</div>
+
+<script>
+  $('#show').on('click', function() {
+    $('body').contextualactionpanel({
+      content: '\
+        <div class="contextual-action-panel">\
+        <div class="modal-content">\
+          <div class="modal-header">\
+            <div class="toolbar">\
+              <div class="title">Company Information</div>\
+              <div class="buttonset">\
+                <button class="btn" type="button">\
+                  <svg class="icon" focusable="false" aria-hidden="true" role="presentation">\
+                    <use href="#icon-save"></use>\
+                  </svg>\
+                </button>\
+                <div class="separator"></div>\
+                <button name="close" class="btn-close btn" type="button">\
+                  <svg class="icon icon-close" focusable="false" aria-hidden="true" role="presentation">\
+                    <use href="#icon-close"></use>\
+                  </svg>\
+                </button>\
+              </div>\
+            </div>\
+          </div>\
+          <div class="modal-body-wrapper">\
+            <div class="modal-body">\
+              <iframe src="./partial-example-content" style="overflow:hidden; width:767px; height:225px;"></iframe>\
+            </div>\
+          </div>\
+        </div>\
+        </div>',
+      trigger: 'immediate'
+    });
+  });
+</script>

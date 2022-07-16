@@ -1,0 +1,32 @@
+
+{{#enableLiveReload}}
+<script src="http://localhost:35729/livereload.js"></script>
+{{/enableLiveReload}}
+
+{{#enableLiveReloadVM}}
+<script src="http://10.0.2.2:35729/livereload.js"></script>
+{{/enableLiveReloadVM}}
+
+<script>
+  // Initialize all IDS Enterprise Controls and set the locale
+  var initialLocale = 'en-US';
+  {{#locale}}
+  initialLocale = '{{locale}}';
+  {{/locale}}
+
+  $('body').initialize({locale: initialLocale});
+</script>
+
+<script>
+  // Initialize the demo info popup
+  $('#info-btn:not(.invisible)').popover({
+    closebutton: true,
+    content: $('#info-popup'),
+    extraClass: 'alternate',
+    placement: 'bottom',
+    popover: true,
+    tooltipElement: '#info-popup-tooltip',
+    title: 'Example Information',
+    trigger: 'click'
+  });
+</script>

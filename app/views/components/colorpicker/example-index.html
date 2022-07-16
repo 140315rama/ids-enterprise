@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="twelve columns">
+    <div class="field">
+      <label for="background-color">Color Picker</label>
+      <input class="colorpicker" id="background-color" type="text" data-init="false"/>
+    </div>
+
+    <div class="field">
+      <label for="disabled-color-picker">Disabled Color Picker</label>
+      <input class="colorpicker" value="#941E1E" disabled="true" id="disabled-color-picker" type="text" />
+    </div>
+  </div>
+</div>
+
+<script>
+  $(function() {
+    // Init the color picker with id's for automation
+    var elem = $('#background-color');
+    elem.colorpicker( {
+      attributes: { name: 'id', value: 'background-color' }
+    });
+
+    // Set the value and trigger change to have it update in the field.
+    elem.val('#B94E4E').trigger('change');
+  });
+</script>

@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="twelve columns">
+      <div class="widget">
+        <div class="widget-header">
+          <h2 class="widget-title">Tree Map Example</h2>
+        </div>
+        <div class="widget-content">
+          <div id="treemap-chart-example" class="chart-container" data-init="false">
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+<script>
+$('body').on('initialized', function () {
+  $.getJSON('{{basepath}}api/storage-usage', function(data) {
+    $('#treemap-chart-example').treemap({
+      dataset: data,
+      attributes: [
+        { name: 'id', value: 'custom-id' },
+        { name: 'data-automation-id', value: 'custom-automation-id' }
+      ]
+    });
+  });
+});
+</script>

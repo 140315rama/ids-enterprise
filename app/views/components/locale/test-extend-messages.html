@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="twelve columns">
+    <h1 class="fieldset-title">Locale - Adding strings to a locale - <span id="title"></span></h1>
+    <div id="output" class="card">
+      <div class="row top-padding">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('body').on('initialized', function(locale, args) {
+    var output = $('#output');
+    var append = function (value) {
+      output.append('<div class="row"><div class="twelve columns">' + value + '</div></div>');
+    };
+
+    $('#title').text(Soho.Locale.currentLocale.data.englishName);
+
+    var myStrings = {
+      Thanks: { id: 'Thanks', value: '~Thanks~', comment: ''},
+      YourWelcome: { id: 'YourWelcome', value: '~You\'re Welcome~', comment: ''}
+    };
+    Locale.extendTranslations(Soho.Locale.currentLanguage.name, myStrings);
+
+    append(Locale.translate('Comments') + '<br>');
+    append(Locale.translate('Thanks') + '<br>');
+    append(Locale.translate('YourWelcome') + '<br>');
+  });
+</script>

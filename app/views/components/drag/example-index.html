@@ -1,0 +1,67 @@
+<style>
+  .drag-container {
+    height: 120px;
+  }
+
+  .drag-box {
+    background: #fff;
+    border: 1px solid #bdbdbd;
+    height: 50px;
+    position: absolute;
+    width: 50px;
+  }
+
+  .left-340 {
+    left: 340px;
+  }
+
+  .left-395 {
+    left: 395px;
+  }
+</style>
+
+<div class="row drag-container top-padding">
+  <div class="twelve columns">
+    <span class="label">Draggable - Free</span>
+    <div class="draggable drag-box">Free</div>
+  </div>
+</div>
+
+<div class="row drag-container">
+  <div class="twelve columns">
+    <span class="label">Draggable - Clone</span>
+    <div class="draggable clone drag-box">Clone</div>
+  </div>
+</div>
+
+<div class="row drag-container">
+  <div class="twelve columns">
+    <span class="label">Draggable - Only on X or Y axis</span>
+    <div class="draggable x-only drag-box">X Only</div>
+  </div>
+</div>
+
+<div class="row drag-container">
+  <div class="twelve columns">
+    <span class="label">Draggable - with Collision Detection</span>
+    <div id="one" class="draggable x-only collision drag-box left-340">Left</div>
+    <div id="two" class="draggable x-only collision drag-box left-395">Right</div>
+  </div>
+</div>
+
+<script>
+  $('.draggable.x-only.collision').drag({axis: 'x', containment: 'parent', obstacle: '.collision'});
+
+  $('.draggable.x-only').drag({axis: 'x', containment: 'parent'});
+
+  $('.draggable.clone').drag({containment: 'document', clone: 'true'});
+
+  $('.draggable').drag({containment: 'document'})
+    .on('dragstart', function () {
+      console.log('dragstart')
+    }).on('drag', function (e, pos) {
+      console.log('drag', pos.left, pos.offset)
+    }).on('dragend', function () {
+      console.log('dragend')
+    });
+</script>

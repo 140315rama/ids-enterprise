@@ -1,0 +1,37 @@
+
+<div class="row">
+  <div class="twelve columns">
+    <button type="button" class="btn-menu" data-init="false" id="test-btn-menu">
+      <span>Add Item</span>
+      <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+        <use href="#icon-dropdown"></use>
+      </svg>
+    </button>
+    <ul class="popupmenu has-icons"></ul>
+  </div>
+</div>
+
+<script>
+
+  $(function() {
+    $('#test-btn-menu').button().popupmenu({beforeOpen: function (response) {
+      var menu = '<li><a href="#">Option One</a></li><li><a href="#">Option Two</a></li>';
+      setTimeout(function () {
+        response(menu);
+      }, 500);
+    }})
+    .on('click', function () {
+      console.log('click event');
+    }).on('beforeopen', function () {
+      //Example of not opening on a condition - but should really use disabled
+      //return false;
+    }).on('open', function () {
+      console.log('beforeopen event');
+    }).on('afteropen', function () {
+      console.log('afteropen event');
+    }).on('selected', function (a,b,c) {
+      console.log(a,b,c);
+    });
+
+  });
+</script>

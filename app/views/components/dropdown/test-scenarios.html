@@ -1,0 +1,185 @@
+<div class="row">
+  <div class="twelve columns">
+    <h2 class="fieldset-title">Drop Down List - Tests</h2>
+
+    <div class="field">
+      <label for="states" class="label">States</label>
+      <select id="states" name="states" class="dropdown">
+        <option value="AL" selected>Alabama</option>
+        <option value="DE">Delaware</option>
+        <option value="DC" disabled>District Of Columbia</option>
+        <option value="FL" disabled>Florida</option>
+        <option value="GA">Georgia</option>
+        <option value="HI">Hawaii</option>
+        <option value="ID">Idaho</option>
+        <option value="OK">Oklahoma</option>
+        <option value="OR">Oregon</option>
+        <option value="PA">Pennsylvania</option>
+        <option value="RI">Rhode Island</option>
+        <option value="SC">South Carolina</option>
+        </select>
+     </div>
+
+     <div class="field">
+      <label for="special" class="label">Special Chars</label>
+      <select id="special" name="special" class="dropdown">
+        <option value="a&#039;z">A&#039;rizona</option>
+        <option value="<">&lt;</option>
+        <option value=">">&gt;</option>
+        <option value="\\myserver\path\">\\myserver\path\</option>
+        <option value="a&#039;z">A&#039;rizona</option>
+        <option value="<=">&lt;=</option>
+        <option value=">=">&gt;=</option>
+        <option value="script">&lt;script&gt;alert('")&lt;/script&gt;</option>
+        <option value="1">&lt;test&gt;</option>
+        <option value="7" >Customer &amp; Internal</option>
+        <option value="a" selected>Apostraphe's</option>
+        <option value="p'p">papa john's pizza</option>
+       </select>
+     </div>
+
+    <div class="field">
+      <label for="static-width" class="label">Set Width</label>
+        <select id="static-width" name="setWidth" class="dropdown" style="width: 80px">
+          <option value="AL">AL</option>
+          <option value="DE">DE</option>
+          <option value="DC">DC</option>
+          <option value="FL">FL</option>
+          <option value="GA">GA</option>
+          <option value="HI">HI</option>
+          <option value="ID">ID</option>
+          <option value="OK">OK</option>
+          <option value="OR">OR</option>
+          <option value="PA">PA</option>
+          <option value="RI">RI</option>
+          <option value="SC">SC</option>
+        </select>
+    </div>
+
+    <div class="field">
+      <label for="static-width-small" class="label">Set Width Small</label>
+        <select id="static-width-small" name="setWidthSmall" class="dropdown" style="width: 55px">
+          <option value="3">3</option>
+          <option value="5">5</option>
+          <option value="4">4</option>
+          <option value="7">7</option>
+        </select>
+    </div>
+
+    <div class="field" style="left:436px; position:absolute; top:356px; z-index:1;">
+      <label for="abs1" class="label">Absolute Position (Bad Practice)</label>
+      <select id="abs1" name="abs1" class="dropdown" style="width: 150px;">
+        <option value="AL">Alabama</option>
+        <option value="DE">Delaware</option>
+        <option value="DC">District Of Columbia</option>
+        <option value="FL">Florida</option>
+        <option value="GA">Georgia</option>
+        <option value="HI">Hawaii</option>
+        <option value="ID">Idaho</option>
+        <option value="OK">Oklahoma</option>
+        <option value="OR">Oregon</option>
+        <option value="PA">Pennsylvania</option>
+        <option value="RI">Rhode Island</option>
+        <option value="SC">South Carolina</option>
+      </select>
+    </div>
+
+  <!-- This wont work any more
+    <label for="abs2" class="label" style="left: 436px; position: absolute;top: 442px;">Absolute Position No Field (Bad Practice)</label>
+    <select id="abs2" name="abs2" class="dropdown" style="width: 50px;left: 436px; position: absolute;top: 488px;">
+      <option value="AL">Alabama</option>
+      <option value="DE">Delaware</option>
+      <option value="DC">District Of Columbia</option>
+      <option value="FL">Florida</option>
+      <option value="GA">Georgia</option>
+      <option value="HI">Hawaii</option>
+      <option value="ID">Idaho</option>
+      <option value="OK">Oklahoma</option>
+      <option value="OR">Oregon</option>
+      <option value="PA">Pennsylvania</option>
+      <option value="RI">Rhode Island</option>
+      <option value="SC">South Carolina</option>
+    </select>
+  -->
+
+    <div class="field">
+      <label for="empty" class="label">Empty List</label>
+      <select id="empty" name="empty" class="dropdown">
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="blank" class="blank">Contains a Blank</label>
+      <select id="blank" name="blank" class="dropdown">
+        <option value="">&nbsp;</option>
+        <option value="notBlank" selected>Not Blank</option>
+        <option value="alsoNotBlank">Also Not Blank</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="dirty" class="label">Dirty</label>
+      <select id="dirty" name="dirty" class="dropdown" data-trackdirty="true">
+        <option value=" "></option>
+        <option value="A">A</option>
+        <option value="B">B</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="invisible" class="label" style="display: none;">Should be Invisible</label>
+      <select id="invisible" name="invisible" class="dropdown" style="display: none;">
+        <option value="hidden">Hidden</option>
+        <option value="missing">Missing</option>
+        <option value="cloaked">Cloaked</option>
+        <option value="stealth">Stealth</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="dupes" class="label">Duplicates Afoot!</label>
+      <select id="dupes" name="dupes" class="dropdown">
+        <option id="firstDupe" value="justAnotherNumber">Just Another Number</option>
+        <option id="secondDupe" value="justAnotherNumber" selected>Just Another Number</option>
+      </select>
+    </div>
+
+      <form id="testForm" action="#" method="POST">
+        <div class="field">
+          <label for="form-dropdown" class="label">This Dropdown's inside a Form Tag</label>
+          <select id="form-dropdown" name="form-dropdown" class="dropdown">
+            <option id="option1" value="notSelectedByDefault">Not Selected by Default</option>
+            <option id="option2" value="selectedByDefault" selected>Selected by Default</option>
+          </select>
+        </div>
+        <button id="submit-button" class="btn" type="submit">Submit</button>
+        <button id="reset-button" class="btn" type="reset">Reset</button>
+        <button id="disable-button" class="btn" type="button">Disable</button>
+    </form>
+
+    <div class="field">
+      <label for="ajax-test">Ajax Test</label>
+      <select id="ajax-test" name="ajax-test" class="dropdown"></select>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  $('#ajax-test').dropdown({
+    source: function (response) {
+      $.getJSON('{{basepath}}api/states', function(data) {
+        response(data);
+      });
+    }
+  });
+
+  $('#disable-button').on('click', function () {
+    var field = $('#dupes');
+    if (field.is(':disabled')) {
+      field.enable();
+    } else {
+      field.disable();
+    }
+  }).trigger('click');
+</script>

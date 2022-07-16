@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="six columns">
+    <h2 class="fieldset-title">Multiselect (with Tags)</h2>
+    {{> components/multiselect/_samples-tagged}}
+  </div>
+</div>
+
+<script>
+  $('body').on('initialized', function () {
+    $('#multi-tagged').on('change', (e) => {
+      console.log('change', e);
+    });
+
+    $('#multi-optgroup-tagged').on('change', (e) => {
+      console.log('change', e);
+    });
+  });
+</script>

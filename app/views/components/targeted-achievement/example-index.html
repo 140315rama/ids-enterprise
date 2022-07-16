@@ -1,0 +1,92 @@
+<div class="row">
+  <div class="two-thirds column">
+    <div id="example-1" class="chart-container"></div>
+    <div id="example-5" class="chart-container"></div>
+    <div id="example-2" class="chart-container"></div>
+    <div id="example-3" class="chart-container"></div>
+    <div id="example-4" class="chart-container"></div>
+</div>
+</div>
+
+<script>
+$('body').on('initialized', function () {
+
+  var dataset1 = [{
+    data: [{
+      name: {text: 'Label A'},
+      completed: {text: '50K of 250K', value: 50000, format: '.2s', color: 'primary'},
+      remaining: {value: 20000, format: '.2s', text: ' To Target'},
+      total: {value: 250000, format: '.2s'},
+    }],
+    attributes: [
+      { name: 'id', value: 'targeted-achievement-example1' },
+      { name: 'data-automation-id', value: 'automation-id-targeted-achievement-example1' }
+    ]
+  }];
+
+  var api1 = $('#example-1').chart({dataset: dataset1, type: 'targeted-achievement'}).data('chart');
+
+  var dataset2 = [{
+    data: [{
+      name: {text: 'Label B'},
+      completed: {text: '250K of 250K', value: 250000, format: '.2s', color: 'primary'},
+      remaining: {value: 250000, format: '.2s', text: ' Complete'},
+      total: {value: 250000, format: '.2s'},
+    }]
+  }];
+
+  var api2 = $('#example-2').chart({dataset: dataset2, type: 'targeted-achievement'}).data('chart');
+
+  var dataset3 = [{
+    data: [{
+      name: {text: 'Label C'},
+      completed: {text: '20K of 250K', value: 20000, format: '.2s', color: 'error', iconTooltip: 'Custom Icon Tooltip Text'},
+      total: {value: 250000, difference: true, text: ' Remaining', format: '.2s'},
+    }]
+  }];
+
+  var api3 = $('#example-3').chart({dataset: dataset3, type: 'targeted-achievement'}).data('chart');
+
+  var dataset4 =  [{
+    data: [{
+      name: {text: 'Good'},
+      completed: {value: 93, color: 'good'},
+    }]
+  }];
+
+  var api4 = $('#example-4').chart({dataset: dataset4, type: 'targeted-achievement'}).data('chart');
+
+  // Example updating a value
+  $('#menu-button').on('selected', function (e, args) {
+    var upd = args.parent().index();
+
+    var dataset1 = [{
+      data: [{
+        name: {text: upd===1 ? 'Label A' : 'Label B'},
+        completed: {text: upd===1 ? '250K of 250K' : '230K of 250', value: upd===1 ? 250000 : 230000, format: '.2s', color: 'primary'},
+        remaining: {value: upd===1 ? 250000 : 230000, format: '.2s', text: ' Completed'},
+        total: {value: 250000, format: '.2s'},
+      }]
+    }];
+
+    $('#example-1').chart({dataset: dataset1, type: 'targeted-achievement'}).data('chart');
+
+  });
+
+  var dataset5 = [{
+    data: [{
+      name: {text: 'Custom Tooltip Text'},
+      completed: {text: '50K of 250K', value: 50000, format: '.2s', color: 'primary', tipText: 'Completed Tooltip'},
+      remaining: {value: 20000, format: '.2s', text: ' To Target', tipText: 'Remaining Tooltip'},
+      total: {value: 250000, format: '.2s'},
+    }],
+    attributes: [
+      { name: 'id', value: 'targeted-achievement-example5' },
+      { name: 'data-automation-id', value: 'automation-id-targeted-achievement-example5' }
+    ]
+  }];
+
+  var api5 = $('#example-5').chart({dataset: dataset5, type: 'targeted-achievement'}).data('chart');
+
+});
+</script>

@@ -1,0 +1,111 @@
+<div class="row top-padding">
+  <div class="six columns">
+
+    <h3>Tree Control: Ajax</h3>
+
+    <p>This example shows how to use the source callback to load child nodes.
+       Clicking the node two to open should after a simulated delay; load a result with the children for this node </p>
+    <br />
+  </div>
+</div>
+
+<div class="row">
+  <div class="twelve columns">
+
+    <ul role="tree" aria-label="Asset Types" class="tree" data-init="false" id="json-tree">
+    </ul>
+
+  </div>
+</div>
+
+<script>
+  var sampleData;
+
+
+  sampleData = [{
+    "id": "node1",
+    "text": "Node One",
+    "extra": "test 1"
+  }, {
+    "id": "node2",
+    "text": "Node Two",
+    "open": false,
+    "children": [],
+    "extra": "test 2"
+  }];
+
+  sampleDataNoID = [{
+    "text": "Node One - I have a less than sign: &lt;",
+    "extra": "test 1",
+    "attributes": [{
+      "name": "id",
+      "value": "tree-ajax-exp1-node1"
+    }, {
+      "name": "data-automation-id",
+      "value": "automation-id-tree-ajax-exp1-node1"
+    }]
+  }, {
+    "text": "Node Two",
+    "open": false,
+    "children": [],
+    "extra": "test 2",
+    "attributes": [{
+      "name": "id",
+      "value": "tree-ajax-exp1-node2"
+    }, {
+      "name": "data-automation-id",
+      "value": "automation-id-tree-ajax-exp1-node2"
+    }]
+  }, {
+    "text": "Node Three",
+    "open": false,
+    "children": null,
+    "extra": "test 3",
+    "attributes": [{
+      "name": "id",
+      "value": "tree-ajax-exp1-node3"
+    }, {
+      "name": "data-automation-id",
+      "value": "automation-id-tree-ajax-exp1-node3"
+    }]
+  }];
+
+
+  var currentAutomationId = -1;
+  //Can refer to the data set here
+  $('#json-tree').tree({dataset: sampleDataNoID, source: function (req, response) {
+    setTimeout(function () {
+      currentAutomationId++;
+
+      var nodes = [{
+        "id": "node2.1",
+        "text": "Node 2.1 - I also have a less than sign: &lt;",
+        "attributes": [{
+          "name": "id",
+          "value": "tree-ajax-exp1-node21-" + currentAutomationId
+        }, {
+          "name": "data-automation-id",
+          "value": "automation-id-tree-ajax-exp1-node21-" + currentAutomationId
+        }]
+      },{
+        "id": "node2.2",
+        "text": "Node 2.2",
+        "children": [],
+        "attributes": [{
+          "name": "id",
+          "value": "tree-ajax-exp1-node22-" + currentAutomationId
+        }, {
+          "name": "data-automation-id",
+          "value": "automation-id-tree-ajax-exp1-node22-" + currentAutomationId
+        }]
+      }];
+
+      response(nodes);
+    }, 2000);
+
+  }}).on('selected', function (e, args) {
+    console.log('selected:', args);
+  });
+
+
+</script>

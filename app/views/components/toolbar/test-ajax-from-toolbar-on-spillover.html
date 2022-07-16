@@ -1,0 +1,184 @@
+<div class="row">
+  <div class="six columns">
+    <h2>Toolbar Test: AJAX From Toolbar on Spillover</h2>
+    <p>It should be possible to define More Actions menu settings on the Toolbar element, and allow those settings to propagate down to the More Actions menu.  This helps the Angular Components environment.</p>
+    <br/>
+    <p></p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="twelve columns">
+
+    <div id="ajax-toolbar" class="toolbar" data-init="false">
+      <div class="title">Ajax-ified Toolbar</div>
+      <div class="buttonset">
+
+        <button id="print-button" class="btn">
+          <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+            <use href="#icon-print"></use>
+          </svg>
+          <span>Print</span>
+        </button>
+
+        <button id="settings-button" class="btn-menu">
+          <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+            <use href="#icon-settings"></use>
+          </svg>
+          <span>Settings</span>
+        </button>
+        <ul class="popupmenu is-selectable">
+          <li class="is-selectable is-checked"><a href="#">Setting #1</a></li>
+          <li class="is-selectable"><a href="#">Setting #2</a></li>
+          <li class="is-selectable"><a href="#">Setting #3</a></li>
+        </ul>
+
+        <button id="save-button" class="btn">
+          <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+            <use href="#icon-save"></use>
+          </svg>
+          <span>Save</span>
+        </button>
+
+        <button id="email-button" class="btn">
+          <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+            <use href="#icon-mail"></use>
+          </svg>
+          <span>Send via email</span>
+        </button>
+
+      </div>
+      <div class="more">
+
+        <button id="predefined-more" class="btn-actions" type="button">
+          <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+            <use href="#icon-more"></use>
+          </svg>
+          <span class="audible" data-translate="text">More</span>
+        </button>
+        <ul id="predefined-more-menu" class="popupmenu" data-init="false" >
+          <li><a href="#">Pre-defined Option #1</a></li>
+        </ul>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="row top-padding">
+  <div class="twelve columns">
+    <button id="change-ajax" type="button" class="btn-secondary">
+      <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+        <use href="#icon-settings"></use>
+      </svg>
+      <span>Change Ajax Call</span>
+    </button>
+
+    <button id="destroy" type="button" class="btn-secondary">
+      <span>Destroy Toolbar Instance</span>
+    </button>
+
+    <button id="reinvoke" type="button" class="btn-secondary" disabled>
+      <span>Re-invoke Toolbar Instance</span>
+    </button>
+  </div>
+</div>
+
+<script>
+  var TOP_LEVEL_POPUPMENU_CONTENT = '' +
+    '<li><a href="#">AJAX Option #1</a></li>' +
+    '<li><a href="#">AJAX Option #2</a></li>' +
+    '<li class="submenu">' +
+      '<a href="#">AJAX Option #3</a>' +
+      '<ul class="popupmenu"></ul>' +
+    '</li>' +
+    '<li><a href="#">AJAX Option #4</a></li>';
+
+  var SUB_LEVEL_POPUPMENU_CONTENT = '' +
+    '<li><a href="#">AJAX Sub-option #1</a></li>' +
+    '<li><a href="#">AJAX Sub-option #2</a></li>' +
+    '<li><a href="#">AJAX Sub-option #3</a></li>' +
+    '<li><a href="#">AJAX Sub-option #4</a></li>';
+
+  var ALTERNATE_TOP_LEVEL_POPUPMENU_CONTENT = '' +
+    '<li><a href="#">Different AJAX Option #1</a></li>' +
+    '<li><a href="#">Different AJAX Option #2</a></li>' +
+    '<li><a href="#">Different AJAX Option #3</a></li>' +
+    '<li><a href="#">Different AJAX Option #4</a></li>';
+
+  // Populate the menu with some fake content for the sake of testing the AJAX call.
+  function popupmenuBeforeOpen(response, options) {
+    if (options.contextElement) {
+      return response( $(SUB_LEVEL_POPUPMENU_CONTENT) );
+    }
+    return response( $(TOP_LEVEL_POPUPMENU_CONTENT) );
+  }
+
+  // Populate the menu with some fake content for the sake of testing the AJAX call.
+  function popupmenuBeforeOpenTwo(response, options) {
+    console.log('Using different Popupmenu Content...');
+    return response( $(ALTERNATE_TOP_LEVEL_POPUPMENU_CONTENT) );
+  }
+
+  // Manually invoke the Toolbar.
+  // (more akin to how the Angular components will deal with the jQuery components)
+  var toolbarElem = $('#ajax-toolbar');
+  var toolbarAPI = toolbarElem.data('toolbar');
+  var moreElem = $('#predefined-more');
+  var moreAPI = moreElem.data('popupmenu');
+
+  var btnChangeAjax = $('#change-ajax');
+  var btnDestroy = $('#destroy');
+  var btnReinvoke = $('#reinvoke');
+
+  // Settings
+  var TOOLBAR_SETTINGS = {
+    maxVisibleButtons: 4,
+    moreMenuSettings: {
+      beforeOpen: popupmenuBeforeOpen
+    }
+  };
+
+  function invokeToolbar() {
+    btnChangeAjax.enable();
+    btnDestroy.enable();
+    btnReinvoke.disable();
+
+    if (toolbarAPI) {
+      toolbarAPI.updated(TOOLBAR_SETTINGS);
+    } else {
+      toolbarElem.toolbar(TOOLBAR_SETTINGS);
+      toolbarAPI = toolbarElem.data('toolbar');
+    }
+  }
+
+  // invoke the toolbar once on page load
+  invokeToolbar();
+
+  // Destroys the toolbar instance.
+  btnDestroy.on('click', function() {
+    $(this).disable();
+    btnChangeAjax.disable();
+    btnReinvoke.enable();
+    toolbarAPI.destroy();
+  });
+
+  // Reinvokes the toolbar instance.
+  btnReinvoke.on('click', function() {
+    invokeToolbar();
+  });
+
+  // Swaps out the More Menu's ajax call for a different one.
+  btnChangeAjax.on('click', function () {
+    $(this).disable();
+
+    if (toolbarAPI) {
+      toolbarAPI.updated({
+        maxVisibleButtons: 4,
+        moreMenuSettings: {
+          beforeOpen: popupmenuBeforeOpenTwo
+        }
+      });
+    }
+  });
+</script>

@@ -1,0 +1,53 @@
+
+<div class="row">
+  <div class="six columns">
+
+    <h2 class="fieldset-title">Multiselect Controls with External Source</h2>
+    <div class="field">
+      <label for="states-multi" class="label">States (Max 10)</label>
+      <select multiple id="states-multi" data-source="{{basepath}}api/states?term=" name="states-multi" data-maxselected="10" class="multiselect"></select>
+    </div>
+
+    <div class="field">
+      <label for="towns-multi-optgroup" class="label">Towns (Max 5)</label>
+      <select multiple data-maxselected="5" data-source="{{basepath}}api/towns" data-init="false" id="towns-multi-optgroup" name="towns-multi-optgroup" class="multiselect"></select>
+    </div>
+
+    <h2 class="fieldset-title">Disabled Multisect</h2>
+
+    <div class="field">
+      <label for="fruits-multi" class="label">Fruits (disabled)</label><br />
+      <select multiple disabled id="fruits-multi" name="fruits-multi" data-maxselected="2" class="multiselect">
+        <option>Apple</option>
+        <option>Banana</option>
+        <option>Grapefruit</option>
+        <option>Kiwi</option>
+        <option>Lemon</option>
+        <option>Lime</option>
+        <option selected>Orange</option>
+        <option>Strawberry</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="six columns">
+
+    <h2 class="fieldset-title">Validated Multiselect Fields</h2>
+
+    <div class="field">
+      <label for="validated-multi" class="label required">Choose an Option (at least One)</label>
+      <select multiple id="validated-multi" data-validate="required" data-maxselected="3" class="multiselect">
+        <option >Cool</option>
+        <option>Awesome</option>
+        <option>Groovy</option>
+        <option>Jammin'</option>
+        <option>Radical</option>
+        <option>Gnarly</option>
+        <option>Schway</option>
+        <option>Neato</option>
+      </select>
+    </div>
+
+  </div>
+
+</div>
